@@ -1,0 +1,17 @@
+@import '../../../../node_modules/papercss/dist/paper.min.css';
+.main {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.loading {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  bottom: 0;
+}
+
+/*# sourceMappingURL=index.css.map */
