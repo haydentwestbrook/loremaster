@@ -1,12 +1,14 @@
 import React from 'react';
+import { Provider } from 'unstated';
+import Character from '../Character/Character';
 
 const Main = () => {
-  const click = () => {};
-
   return (
     <div className="main">
-      <h1>React App</h1>
-      <button onClick={click}>Click</button>
+      <h1>Lore Master</h1>
+      <Provider>
+        <Character />
+      </Provider>
     </div>
   );
 };

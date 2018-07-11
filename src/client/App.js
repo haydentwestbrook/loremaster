@@ -17,10 +17,10 @@ export default class App extends Component {
   render() {
     const { loaded } = this.state;
     return (
-      <div>
+      <React.Fragment>
         {loaded ? <Main /> : null}
         <Loading loaded={loaded} />
-      </div>
+      </React.Fragment>
     );
   }
 }
