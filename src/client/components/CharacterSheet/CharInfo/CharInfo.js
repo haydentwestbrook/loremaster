@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Input from '../../../common/Input/Input';
+import Input from '../../common/Input/Input';
+import { Row, Column } from '../../common/Markup/Markup';
 
 class CharInfo extends Component {
   constructor(props) {
@@ -30,18 +31,18 @@ class CharInfo extends Component {
     const { write } = this.props;
     const info = this.props.character.state.info;
     return (
-      <div className="row flex-center">
-        <div className="col col-6 align-middle">
+      <Row classes={'flex-center'}>
+        <Column num="6" classes={'align-middle'}>
           <Input
             label="Character Name"
             value={info.name}
             write={write}
             onChange={e => this.updateChar({ name: e.target.value })}
           />
-        </div>
-        <div className="col col-6">
-          <div className="row flex-center">
-            <div className="col col-4">
+        </Column>
+        <Column num="6">
+          <Row class={'flex-center'}>
+            <Column num="4">
               <Input
                 label="Class and Level"
                 value={this.buildClassDisplay(info.levels)}
@@ -50,26 +51,26 @@ class CharInfo extends Component {
                   return null;
                 }}
               />
-            </div>
-            <div className="col col-4">
+            </Column>
+            <Column num="4">
               <Input
                 label="Background"
                 value={info.background}
                 write={write}
                 onChange={e => this.updateChar({ background: e.target.value })}
               />
-            </div>
-            <div className="col col-4">
+            </Column>
+            <Column num="4">
               <Input
                 label="Player Name"
                 value={info.playerName}
                 write={write}
                 onChange={e => this.updateChar({ playerName: e.target.value })}
               />
-            </div>
-          </div>
-          <div className="row flex-center">
-            <div className="col col-4">
+            </Column>
+          </Row>
+          <Row classes={'flex-center'}>
+            <Column num="4">
               <Input
                 label="Race/Template"
                 value={this.buildRaceDisplay(info.race)}
@@ -78,26 +79,26 @@ class CharInfo extends Component {
                   return null;
                 }}
               />
-            </div>
-            <div className="col col-4">
+            </Column>
+            <Column num="4">
               <Input
                 label="Alignment"
                 value={info.Alignment}
                 write={write}
                 onChange={e => this.updateChar({ alignment: e.target.value })}
               />
-            </div>
-            <div className="col col-4">
+            </Column>
+            <Column num="4">
               <Input
                 label="Experience"
                 value={info.experience}
                 write={write}
                 onChange={e => this.updateChar({ experience: e.target.value })}
               />
-            </div>
-          </div>
-        </div>
-      </div>
+            </Column>
+          </Row>
+        </Column>
+      </Row>
     );
   }
 }
