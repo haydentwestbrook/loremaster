@@ -31,8 +31,8 @@ class CharInfo extends Component {
     const { write } = this.props;
     const info = this.props.character.state.info;
     return (
-      <Row classes={'flex-center'}>
-        <Column num="6" classes={'align-middle'}>
+      <Row classes="flex-center">
+        <Column lg="6" sm="12" classes={'align-middle'}>
           <Input
             label="Character Name"
             value={info.name}
@@ -40,9 +40,9 @@ class CharInfo extends Component {
             onChange={e => this.updateChar({ name: e.target.value })}
           />
         </Column>
-        <Column num="6">
-          <Row class={'flex-center'}>
-            <Column num="4">
+        <Column lg="6" sm="12">
+          <Row classes="flex-center">
+            <Column lg="4">
               <Input
                 label="Class and Level"
                 value={this.buildClassDisplay(info.levels)}
@@ -52,7 +52,7 @@ class CharInfo extends Component {
                 }}
               />
             </Column>
-            <Column num="4">
+            <Column lg="4">
               <Input
                 label="Background"
                 value={info.background}
@@ -60,7 +60,7 @@ class CharInfo extends Component {
                 onChange={e => this.updateChar({ background: e.target.value })}
               />
             </Column>
-            <Column num="4">
+            <Column lg="4">
               <Input
                 label="Player Name"
                 value={info.playerName}
@@ -69,8 +69,8 @@ class CharInfo extends Component {
               />
             </Column>
           </Row>
-          <Row classes={'flex-center'}>
-            <Column num="4">
+          <Row classes="flex-center">
+            <Column lg="4">
               <Input
                 label="Race/Template"
                 value={this.buildRaceDisplay(info.race)}
@@ -80,7 +80,7 @@ class CharInfo extends Component {
                 }}
               />
             </Column>
-            <Column num="4">
+            <Column lg="4">
               <Input
                 label="Alignment"
                 value={info.Alignment}
@@ -88,7 +88,7 @@ class CharInfo extends Component {
                 onChange={e => this.updateChar({ alignment: e.target.value })}
               />
             </Column>
-            <Column num="4">
+            <Column lg="4">
               <Input
                 label="Experience"
                 value={info.experience}

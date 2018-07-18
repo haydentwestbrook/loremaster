@@ -9,14 +9,14 @@ class CharacterContainer extends Container {
     this.updateCharacter = this.updateCharacter.bind(this);
     this.loadCharacter = this.loadCharacter.bind(this);
     this.saveCharacter = this.saveCharacter.bind(this);
+    this.getKey = this.getKey.bind(this);
 
     this.store = new LocalStorageHelper();
-    const char = this.store.get('LM_1');
+    const char = this.loadCharacter();
     if (char) {
       this.state = char;
     } else {
       this.state = {
-        key: 'LM_1',
         info: {
           name: 'Noruk',
           background: '',
@@ -31,19 +31,22 @@ class CharacterContainer extends Container {
     //window.setInterval(this.saveCharacter, 3000);
   }
 
+  getKey() {
+    return 'LM_1';
+  }
+
   updateCharacter(state) {
     this.setState(state).then(this.saveCharacter);
   }
 
   loadCharacter() {
-    const key = this.state.key;
-    this.setState(JSON.parse(this.store.get(key)));
+    const key = this.getKey();
+    const obj = JSON.parse(this.store.get(key));
+    this.setState(obj);
   }
 
   saveCharacter() {
-    console.log('saving');
-    const key = this.state.key;
-    this.store.remove(key);
+    const key = this.getKey();
     this.store.set(key, JSON.stringify(this.state));
   }
 }

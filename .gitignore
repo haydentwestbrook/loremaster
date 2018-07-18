@@ -3,3 +3,4 @@ node_modules
 dist
 *.log
 data/*
+src/client/styles/css/index.css
