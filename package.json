@@ -10,7 +10,7 @@
     "build": "webpack --mode production",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "nodemon src/server/index.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run sass\" \"npm run mongodb\""
+    "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run sass\""
   },
   "author": "Hayden Westbrook",
   "dependencies": {

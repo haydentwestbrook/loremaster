@@ -40,20 +40,20 @@ class Input extends Component {
     const { error } = this.state;
     return (
       <div className="form-group">
-        <label>{label}</label>
         <input
           disabled={!write}
-          className={'input-block' + (error ? ' alert alert-danger' : '')}
+          className={'input input-block' + (error ? ' alert alert-danger' : '')}
           type="text"
           value={error ? '' : value}
           onChange={e => {
             this.handleChange(e);
           }}
         />
+        <span>{label}</span>
         {error ? (
-          <label className="input__error">
-            value must be a {String(validation)}
-          </label>
+          <span className="input__error">
+            {' '}value must be a {String(validation)}
+          </span>
         ) : null}
       </div>
     );

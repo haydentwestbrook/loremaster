@@ -21,5 +21,8 @@
 .form-group {
   margin-bottom: 0;
 }
+.form-group .input {
+  display: block;
+}
 
 /*# sourceMappingURL=index.css.map */

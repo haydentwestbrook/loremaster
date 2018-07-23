@@ -1,6 +1,6 @@
-import React from 'react';
-import { Container } from 'unstated';
-import LocalStorageHelper from '../../helpers/LocalStorageHelper';
+import React from "react";
+import { Container } from "unstated";
+import LocalStorageHelper from "../../helpers/LocalStorageHelper";
 
 class CharacterContainer extends Container {
   constructor(props) {
@@ -18,21 +18,28 @@ class CharacterContainer extends Container {
     } else {
       this.state = {
         info: {
-          name: 'Noruk',
-          background: '',
+          name: "Noruk",
+          background: "",
           experience: 0,
-          aligntment: '',
+          aligntment: "",
           race: null,
           levels: {}
+        },
+        attributes: {
+          Strength: 10,
+          Dexterity: 10,
+          Constitution: 10,
+          Intelligence: 10,
+          Wisdom: 10,
+          Charisma: 10
         }
       };
     }
     this.saveCharacter();
-    //window.setInterval(this.saveCharacter, 3000);
   }
 
   getKey() {
-    return 'LM_1';
+    return "LM_1";
   }
 
   updateCharacter(state) {
@@ -47,6 +54,7 @@ class CharacterContainer extends Container {
 
   saveCharacter() {
     const key = this.getKey();
+    this.store.remove(key);
     this.store.set(key, JSON.stringify(this.state));
   }
 }

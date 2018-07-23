@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Input from '../../common/Input/Input';
-import { Row, Column } from '../../common/Markup/Markup';
+import { Row, Column, Collapsible } from '../../common/Markup/Markup';
 
 class CharInfo extends Component {
   constructor(props) {
@@ -15,7 +15,6 @@ class CharInfo extends Component {
     const character = this.props.character.state;
     const updateCharacter = this.props.character.updateCharacter;
     const updated = Object.assign(character.info, data);
-    this.setState(updated);
     updateCharacter(Object.assign(character, updated));
   }
 
@@ -31,6 +30,8 @@ class CharInfo extends Component {
     const { write } = this.props;
     const info = this.props.character.state.info;
     return (
+      <Row>
+      <Collapsible label="Info" id="collapsible1" checked="true">
       <Row classes="flex-center">
         <Column lg="6" sm="12" classes={'align-middle'}>
           <Input
@@ -98,6 +99,8 @@ class CharInfo extends Component {
             </Column>
           </Row>
         </Column>
+      </Row>
+      </Collapsible>
       </Row>
     );
   }

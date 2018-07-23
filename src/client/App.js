@@ -32,17 +32,17 @@ export default class App extends Component {
               <Link to="/">LoreMaster</Link>
             </h3>
           </div>
-          <div class="collapsible">
-            <input id="collapsible1" type="checkbox" name="collapsible1" />
+          <div className="collapsible">
+            <input id="nav-collapse" type="checkbox" name="nav-collapse" />
             <button>
-            <label for="collapsible1">
-                <div class="bar1"></div>
-                <div class="bar2"></div>
-                <div class="bar3"></div>
+            <label htmlFor="nav-collapse">
+                <div className="bar1"></div>
+                <div className="bar2"></div>
+                <div className="bar3"></div>
               </label>
             </button>
-            <div class="collapsible-body">
-              <ul class="inline">
+            <div className="collapsible-body">
+              <ul className="inline">
                 <li><Link to="/character">Character</Link></li>
               </ul>
             </div>
