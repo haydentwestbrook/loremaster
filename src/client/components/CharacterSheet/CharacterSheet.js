@@ -7,16 +7,24 @@ import CharInfo from "./CharInfo/CharInfo";
 import Attributes from "./Attributes/Attributes";
 
 const Character = props => {
+  const { id } = props.match.params;
+
+  console.log(props);
+
   return (
     <Subscribe to={[CharacterContainer]}>
-      {character => (
-        <div className="character">
-          <CharInfo character={character} write={true} />
-          <Row>
-            <Attributes character={character} write={true} />
-          </Row>
-        </div>
-      )}
+      {container => {
+        container.loadCharacter(id);
+        const character = container.state;
+        return (
+          <div className="character">
+            <CharInfo character={character} write={true} />
+            <Row>
+              <Attributes character={character} write={true} />
+            </Row>
+          </div>
+        );
+      }}
     </Subscribe>
   );
 };

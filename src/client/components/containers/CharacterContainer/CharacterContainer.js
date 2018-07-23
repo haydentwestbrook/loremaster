@@ -10,32 +10,11 @@ class CharacterContainer extends Container {
     this.loadCharacter = this.loadCharacter.bind(this);
     this.saveCharacter = this.saveCharacter.bind(this);
     this.getKey = this.getKey.bind(this);
+    this.loadCharacterList = this.loadCharacterList.bind(this);
 
     this.store = new LocalStorageHelper();
-    const char = this.loadCharacter();
-    if (char) {
-      this.state = char;
-    } else {
-      this.state = {
-        info: {
-          name: "Noruk",
-          background: "",
-          experience: 0,
-          aligntment: "",
-          race: null,
-          levels: {}
-        },
-        attributes: {
-          Strength: 10,
-          Dexterity: 10,
-          Constitution: 10,
-          Intelligence: 10,
-          Wisdom: 10,
-          Charisma: 10
-        }
-      };
-    }
-    this.saveCharacter();
+    this.state = null;
+    this.loadCharacterList();
   }
 
   getKey() {
@@ -46,16 +25,18 @@ class CharacterContainer extends Container {
     this.setState(state).then(this.saveCharacter);
   }
 
-  loadCharacter() {
-    const key = this.getKey();
+  loadCharacter(key) {
     const obj = JSON.parse(this.store.get(key));
     this.setState(obj);
   }
 
-  saveCharacter() {
-    const key = this.getKey();
+  saveCharacter(key) {
     this.store.remove(key);
     this.store.set(key, JSON.stringify(this.state));
+  }
+
+  loadCharacterList() {
+    this.setState({ list: [{ key: "LM_1", name: "Noruk", id: 0 }] });
   }
 }
 
