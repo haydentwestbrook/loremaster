@@ -1,32 +1,48 @@
-import React from "react";
-import { Subscribe } from "unstated";
-import FiveEContainer from "../containers/FiveEContainer/FiveEContainer";
-import CharacterContainer from "../containers/CharacterContainer/CharacterContainer";
-import { Row, Column } from "../common/Markup/Markup";
-import CharInfo from "./CharInfo/CharInfo";
-import Attributes from "./Attributes/Attributes";
+import React, { Component } from 'react';
+import { Subscribe } from 'unstated';
+import FiveEContainer from '../containers/FiveEContainer/FiveEContainer';
+import CharacterContainer from '../containers/CharacterContainer/CharacterContainer';
+import { Row, Column } from '../common/Markup/Markup';
+import Loading from '../Loading/Loading';
+import CharInfo from './CharInfo/CharInfo';
+import Attributes from './Attributes/Attributes';
 
-const Character = props => {
-  const { id } = props.match.params;
+class CharacterSheetInternal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      write: true
+    };
+  }
 
-  console.log(props);
+  didComponentMount() {
+    this.props.context.loadCharacter();
+  }
 
+  render() {
+    const { write } = this.state;
+    if (!props.context) return <Loading />;
+    const character = this.props.context.state;
+    return (
+      <div className="character">
+        // <CharInfo character={character} write={write} />
+        <Row>
+          // <Attributes character={character} write={write} />
+        </Row>
+      </div>
+    );
+  }
+}
+
+const CharacterSheetWrapper = props => {
+  console.log('test');
   return (
     <Subscribe to={[CharacterContainer]}>
-      {container => {
-        container.loadCharacter(id);
-        const character = container.state;
-        return (
-          <div className="character">
-            <CharInfo character={character} write={true} />
-            <Row>
-              <Attributes character={character} write={true} />
-            </Row>
-          </div>
-        );
+      {context => {
+        <CharacterSheetInternal {...props} context={context} />;
       }}
     </Subscribe>
   );
 };
 
-export default Character;
+export default CharacterSheetWrapper;

@@ -1,6 +1,6 @@
-import React from "react";
-import { Container } from "unstated";
-import LocalStorageHelper from "../../helpers/LocalStorageHelper";
+import React from 'react';
+import { Container } from 'unstated';
+import LocalStorageHelper from '../../helpers/LocalStorageHelper';
 
 class CharacterContainer extends Container {
   constructor(props) {
@@ -14,11 +14,10 @@ class CharacterContainer extends Container {
 
     this.store = new LocalStorageHelper();
     this.state = null;
-    this.loadCharacterList();
   }
 
   getKey() {
-    return "LM_1";
+    return 'LM_1';
   }
 
   updateCharacter(state) {
@@ -36,7 +35,7 @@ class CharacterContainer extends Container {
   }
 
   loadCharacterList() {
-    this.setState({ list: [{ key: "LM_1", name: "Noruk", id: 0 }] });
+    this.setState({ list: [{ key: 'LM_1', name: 'Noruk', id: 0 }] });
   }
 }
 
