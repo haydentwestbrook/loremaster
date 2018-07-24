@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Subscribe } from 'unstated';
-import FiveEContainer from '../containers/FiveEContainer/FiveEContainer';
-import CharacterContainer from '../containers/CharacterContainer/CharacterContainer';
-import { Row, Column } from '../common/Markup/Markup';
-import Loading from '../Loading/Loading';
-import CharInfo from './CharInfo/CharInfo';
-import Attributes from './Attributes/Attributes';
+import React, { Component } from "react";
+import { Subscribe } from "unstated";
+import FiveEContainer from "../containers/FiveEContainer/FiveEContainer";
+import CharacterContainer from "../containers/CharacterContainer/CharacterContainer";
+import { Row, Column } from "../common/Markup/Markup";
+import Loading from "../Loading/Loading";
+import CharInfo from "./CharInfo/CharInfo";
+import Abilities from "./Abilities/Abilities";
 
 class CharacterSheetInternal extends Component {
   constructor(props) {
@@ -13,21 +13,38 @@ class CharacterSheetInternal extends Component {
     this.state = {
       write: true
     };
+
+    this.update = this.update.bind(this);
   }
 
-  didComponentMount() {
-    this.props.context.loadCharacter();
+  componentWillMount() {
+    this.props.context.loadCharacter(this.props.match.params.id);
+  }
+
+  update(state) {
+    const updateCharacter = this.props.context.updateCharacter;
+    const id = this.props.match.params.id;
+    updateCharacter(state, id);
   }
 
   render() {
     const { write } = this.state;
-    if (!props.context) return <Loading />;
-    const character = this.props.context.state;
+    const { context } = this.props;
+    if (!context.state.character) return <Loading />;
+    const character = context.state.character;
     return (
       <div className="character">
-        // <CharInfo character={character} write={write} />
+        <CharInfo
+          character={character}
+          write={write}
+          updateCharacter={this.update}
+        />
         <Row>
-          // <Attributes character={character} write={write} />
+          <Abilities
+            character={character}
+            write={write}
+            updateCharacter={this.update}
+          />
         </Row>
       </div>
     );
@@ -35,12 +52,9 @@ class CharacterSheetInternal extends Component {
 }
 
 const CharacterSheetWrapper = props => {
-  console.log('test');
   return (
     <Subscribe to={[CharacterContainer]}>
-      {context => {
-        <CharacterSheetInternal {...props} context={context} />;
-      }}
+      {context => <CharacterSheetInternal {...props} context={context} />}
     </Subscribe>
   );
 };

@@ -1,6 +1,6 @@
-import React from 'react';
-import { Container } from 'unstated';
-import LocalStorageHelper from '../../helpers/LocalStorageHelper';
+import React from "react";
+import { Container } from "unstated";
+import LocalStorageHelper from "../../helpers/LocalStorageHelper";
 
 class CharacterContainer extends Container {
   constructor(props) {
@@ -11,31 +11,57 @@ class CharacterContainer extends Container {
     this.saveCharacter = this.saveCharacter.bind(this);
     this.getKey = this.getKey.bind(this);
     this.loadCharacterList = this.loadCharacterList.bind(this);
+    this.getBlankCharacter = this.getBlankCharacter.bind(this);
 
     this.store = new LocalStorageHelper();
-    this.state = null;
+    this.state = {
+      list: null,
+      character: this.getBlankCharacter()
+    };
   }
 
   getKey() {
-    return 'LM_1';
+    return "LM_1";
   }
 
-  updateCharacter(state) {
-    this.setState(state).then(this.saveCharacter);
+  getBlankCharacter() {
+    return {
+      info: {
+        name: "",
+        race: null,
+        levels: null,
+        background: "",
+        experience: 0,
+        alignment: "",
+        playerName: ""
+      },
+      abilities: {
+        Strength: 10,
+        Desxterity: 10,
+        Constitution: 10,
+        Intelligence: 10,
+        Wisdom: 10,
+        Charisma: 10
+      }
+    };
+  }
+
+  updateCharacter(state, key) {
+    this.setState({ character: state }).then(() => this.saveCharacter(key));
   }
 
   loadCharacter(key) {
     const obj = JSON.parse(this.store.get(key));
-    this.setState(obj);
+    if (obj) this.setState({ character: obj });
   }
 
   saveCharacter(key) {
     this.store.remove(key);
-    this.store.set(key, JSON.stringify(this.state));
+    this.store.set(key, JSON.stringify(this.state.character));
   }
 
   loadCharacterList() {
-    this.setState({ list: [{ key: 'LM_1', name: 'Noruk', id: 0 }] });
+    this.setState({ list: [{ name: "Noruk", id: 0 }] });
   }
 }
 

@@ -2,14 +2,12 @@ import React from "react";
 import Input from "../../common/Input/Input";
 import { Row, Column } from "../../common/Markup/Markup";
 
-const Attributes = props => {
-  const { write } = props;
-  const character = props.character.state;
-  const updateCharacter = props.character.updateCharacter;
-  const attributes = props.character.state.attributes;
+const Abilities = props => {
+  const { write, character, updateCharacter } = props;
+  const abilities = character.abilities;
 
   const update = data => {
-    const updated = Object.assign(character.attributes, data);
+    const updated = Object.assign(character.abilities, data);
     updateCharacter(Object.assign(character, updated));
   };
 
@@ -18,13 +16,13 @@ const Attributes = props => {
     return bonus < 0 ? bonus : "+" + bonus;
   };
 
-  const renderAttributes = Object.keys(attributes).map(key => {
-    const value = attributes[key];
+  const renderAbilities = Object.keys(abilities).map(key => {
+    const value = abilities[key];
     return (
       <div className="attribute" key={key}>
         <Input
           label={key}
-          write={true}
+          write={write}
           value={value}
           onChange={e => update({ [key]: e.target.value })}
           validation="number"
@@ -34,7 +32,7 @@ const Attributes = props => {
     );
   });
 
-  return <Column num="1">{renderAttributes}</Column>;
+  return <Column num="1">{renderAbilities}</Column>;
 };
 
-export default Attributes;
+export default Abilities;
