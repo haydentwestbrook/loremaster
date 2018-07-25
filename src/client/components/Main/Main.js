@@ -1,9 +1,8 @@
-import React from 'react';
+import React from "react";
+import Login from "../Login/Login";
 
 const Main = () => {
-  return (
-    null
-  );
+  return <Login />;
 };
 
 export default Main;
