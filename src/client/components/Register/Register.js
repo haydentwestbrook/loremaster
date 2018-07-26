@@ -1,13 +1,13 @@
 import React from "react";
 
-const Login = () => {
+const Register = () => {
   const onSubmit = event => {
     event.preventDefault();
-    console.log("Login");
+    console.log("register");
   };
 
   return (
-    <div className="login">
+    <div className="register" action="/register">
       <form
         onSubmit={event => {
           onSubmit(event);
@@ -22,6 +22,10 @@ const Login = () => {
           <input type="password" name="password" />
         </div>
         <div className="form-group">
+          <label>Repeat password</label>
+          <input type="password" name="password-repeat" />
+        </div>
+        <div className="form-group">
           <input type="submit" name="submit" value="Submit" />
         </div>
       </form>
@@ -29,4 +33,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
