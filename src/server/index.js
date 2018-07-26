@@ -32,23 +32,36 @@ app.get("/api/getUsername", (req, res) =>
   res.send({ username: os.userInfo().username })
 );
 
-app.post("/login", passport.authenticate("local"), (req, res) => {
-  res.json({ username: req.user.username });
-});
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/characters",
+    failureRedirect: "/"
+  })
+);
 
 app.post("/register", (req, res) => {
   if (!req.body.username || !req.body.password) {
-    res.json({ success: false, msg: "Please pass username and password." });
+    return res.json({
+      success: false,
+      message: "Please pass username and password."
+    });
   } else {
-    const newUser = new User({
+    const user = new User({
       username: req.body.username,
       password: req.body.password
     });
-    newUser.save(function(err) {
+    user.save(function(err) {
       if (err) {
-        return res.json({ success: false, msg: "Username already exists." });
+        return res.json({
+          success: false,
+          message: "Username already exists."
+        });
       }
-      res.json({ success: true, msg: "Successful created new user." });
+      return res.json({
+        success: true,
+        message: "Successful created new user."
+      });
     });
   }
 });

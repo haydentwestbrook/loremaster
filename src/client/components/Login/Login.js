@@ -8,11 +8,7 @@ const Login = () => {
 
   return (
     <div className="login">
-      <form
-        onSubmit={event => {
-          onSubmit(event);
-        }}
-      >
+      <form method="post" action="/login">
         <div className="form-group">
           <label>Username</label>
           <input type="text" name="username" />
