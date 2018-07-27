@@ -1,4 +1,5 @@
 import React from "react";
+import Alert from "../common/Alert/Alert";
 
 class Register extends React.Component {
   constructor(props) {
@@ -7,7 +8,9 @@ class Register extends React.Component {
     this.state = {
       username: "",
       password: "",
-      passwordRepeat: ""
+      passwordRepeat: "",
+      success: false,
+      message: false
     };
 
     this.changeUsername = this.changeUsername.bind(this);
@@ -46,6 +49,7 @@ class Register extends React.Component {
   }
 
   render() {
+    const { username, password, passwordRepeat, message, success } = this.state;
     return (
       <div className="register">
         <form
@@ -53,22 +57,14 @@ class Register extends React.Component {
             this.onSubmit(e);
           }}
         >
-          {this.state.message ? (
-            <div
-              className={
-                "alert " +
-                (this.state.success ? "alert-success" : "alert-danger")
-              }
-            >
-              {this.state.message}
-            </div>
-          ) : null}
+          <Alert show={message} success={success} message={message} />
           <div className="form-group">
             <label>Username</label>
             <input
               type="text"
               name="username"
               onChange={e => this.changeUsername(e)}
+              value={username}
             />
           </div>
           <div className="form-group">
@@ -77,6 +73,7 @@ class Register extends React.Component {
               type="password"
               name="password"
               onChange={e => this.changePassword(e)}
+              value={password}
             />
           </div>
           <div className="form-group">
@@ -85,6 +82,7 @@ class Register extends React.Component {
               type="password"
               name="password-repeat"
               onChange={e => this.changePasswordRepeat(e)}
+              value={passwordRepeat}
             />
           </div>
           <div className="form-group">
