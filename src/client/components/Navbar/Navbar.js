@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { Subscribe } from "unstated";
+import Authorize from "../Authentication/Authorize";
 
 class Navbar extends Component {
   constructor(props) {
@@ -25,9 +27,14 @@ class Navbar extends Component {
           </button>
           <div className="collapsible-body">
             <ul className="inline">
-              <li>
-                <Link to="/characters">Characters</Link>
-              </li>
+              <Authorize redirect={false}>
+                <li>
+                  <Link to="/characters">Characters</Link>
+                </li>
+                <li>
+                  <Link to="/logout">Log Out</Link>
+                </li>
+              </Authorize>
             </ul>
           </div>
         </div>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Subscribe } from "unstated";
 import FiveEContainer from "../containers/FiveEContainer/FiveEContainer";
 import CharacterContainer from "../containers/CharacterContainer/CharacterContainer";
+import Authorize from "../Authentication/Authorize";
 import { Row, Column } from "../common/Markup/Markup";
 import Loading from "../Loading/Loading";
 import CharInfo from "./CharInfo/CharInfo";
@@ -53,9 +54,11 @@ class CharacterSheetInternal extends Component {
 
 const CharacterSheetWrapper = props => {
   return (
-    <Subscribe to={[CharacterContainer]}>
-      {context => <CharacterSheetInternal {...props} context={context} />}
-    </Subscribe>
+    <Authorize redirect={true}>
+      <Subscribe to={[CharacterContainer]}>
+        {context => <CharacterSheetInternal {...props} context={context} />}
+      </Subscribe>
+    </Authorize>
   );
 };
 

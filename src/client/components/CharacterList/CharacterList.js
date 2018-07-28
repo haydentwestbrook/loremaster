@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import CharacterContainer from "../containers/CharacterContainer/CharacterContainer";
 import { Row, Column } from "../common/Markup/Markup";
 import Loading from "../Loading/Loading";
+import Authorize from "../Authentication/Authorize";
 
 class CharacterListInternal extends Component {
   constructor(props) {
@@ -40,9 +41,11 @@ const Characters = props => {
 
 const CharacterListWrapper = props => {
   return (
-    <Subscribe to={[CharacterContainer]}>
-      {context => <CharacterListInternal {...props} context={context} />}
-    </Subscribe>
+    <Authorize redirect={true}>
+      <Subscribe to={[CharacterContainer]}>
+        {context => <CharacterListInternal {...props} context={context} />}
+      </Subscribe>
+    </Authorize>
   );
 };
 

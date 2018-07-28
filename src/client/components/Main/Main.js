@@ -1,6 +1,6 @@
-import React from 'react';
-import Login from '../Login/Login';
-import Register from '../Register/Register';
+import React from "react";
+import Login from "../Authentication/Login";
+import Register from "../Authentication/Register";
 
 const Main = () => {
   return (

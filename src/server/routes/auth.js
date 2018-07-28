@@ -27,7 +27,7 @@ router.post("/login", (req, res) => {
             // if user is found and password is right create a token
             var token = jwt.sign(user.toJSON(), settings.secret);
             // return the information including token as JSON
-            res.json({ success: true, token: "JWT " + token });
+            res.json({ success: true, token: token, id: user._id });
           } else {
             res.status(401).send({
               success: false,
@@ -60,7 +60,7 @@ router.post("/register", (req, res) => {
       }
       return res.json({
         success: true,
-        message: "Successful created new user."
+        message: "Successfully created new user."
       });
     });
   }
