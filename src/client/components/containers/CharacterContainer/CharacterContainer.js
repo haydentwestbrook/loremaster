@@ -11,12 +11,12 @@ class CharacterContainer extends Container {
     this.saveCharacter = this.saveCharacter.bind(this);
     this.getKey = this.getKey.bind(this);
     this.loadCharacterList = this.loadCharacterList.bind(this);
-    this.getBlankCharacter = this.getBlankCharacter.bind(this);
+    this.getNewCharacter = this.getNewCharacter.bind(this);
 
     this.store = new LocalStorageHelper();
     this.state = {
       list: null,
-      character: this.getBlankCharacter()
+      character: this.getNewCharacter()
     };
   }
 
@@ -24,7 +24,7 @@ class CharacterContainer extends Container {
     return "LM_1";
   }
 
-  getBlankCharacter() {
+  getNewCharacter() {
     return {
       info: {
         name: "",
@@ -51,8 +51,15 @@ class CharacterContainer extends Container {
   }
 
   loadCharacter(key) {
-    const obj = JSON.parse(this.store.get(key));
-    if (obj) this.setState({ character: obj });
+    fetch("/getCharacter", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      body: { userId: userId, token: token }
+    })
+      .then(res => res.json().then(res => this.setState(res.character)))
+      .catch(error => console.log(error));
   }
 
   saveCharacter(key) {
@@ -60,8 +67,16 @@ class CharacterContainer extends Container {
     this.store.set(key, JSON.stringify(this.state.character));
   }
 
-  loadCharacterList() {
-    this.setState({ list: [{ name: "Noruk", id: 0 }] });
+  loadCharacterList(userId, token) {
+    fetch("/getCharacters", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      body: { userId: userId, token: token }
+    })
+      .then(res => res.json().then(res => this.setState(res.characters)))
+      .catch(error => console.log(error));
   }
 }
 

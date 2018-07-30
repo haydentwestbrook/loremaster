@@ -15,11 +15,12 @@ const jwt = require("jsonwebtoken");
 
 const settings = require("./config/settings");
 const auth = require("./routes/auth");
+const characters = require("./routes/characters");
 
 mongoose.Promise = bluebird;
 mongoose
   .connect(
-    "mongodb://localhost/users",
+    "mongodb://localhost",
     { promiseLibrary: require("bluebird") }
   )
   .then(() => console.log("connection succesful"))
@@ -32,9 +33,10 @@ app.use(cookieParser());
 app.use(bodyParser());
 app.use(flash());
 app.use("/", auth);
+app.use("/", characters);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(function(req, res, next) {
-  res.status(404).redirect("/");
+  //res.status(404).redirect("/");
 });
 app.listen(8080, () => console.log("Listening on port 8080!"));

@@ -10,12 +10,14 @@ class Register extends React.Component {
       password: "",
       passwordRepeat: "",
       success: false,
-      message: false
+      message: false,
+      loading: false
     };
 
     this.changeUsername = this.changeUsername.bind(this);
     this.changePassword = this.changePassword.bind(this);
     this.changePasswordRepeat = this.changePasswordRepeat.bind(this);
+    this.validate = this.validate.bind(this);
   }
 
   changeUsername(event) {
@@ -30,26 +32,46 @@ class Register extends React.Component {
     this.setState({ passwordRepeat: event.target.value });
   }
 
+  validate() {
+    const { username, password, passwordRepeat } = this.state;
+    if (password == passwordRepeat) {
+      return true;
+    }
+    this.setState({ success: false, message: "Passwords must match." });
+    return false;
+  }
+
   onSubmit(event) {
     event.preventDefault();
-    fetch("/register", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json; charset=utf-8"
-      },
-      body: JSON.stringify(this.state)
-    }).then(res =>
-      res
-        .json()
-        .then(res => {
-          this.setState(res);
-        })
-        .catch(error => console.log(error))
-    );
+    if (this.validate()) {
+      this.setState({ loading: true });
+      fetch("/register", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        body: JSON.stringify(this.state)
+      }).then(res => {
+        this.setState({ loading: false });
+        res
+          .json()
+          .then(res => {
+            this.setState(res);
+          })
+          .catch(error => console.log(error));
+      });
+    }
   }
 
   render() {
-    const { username, password, passwordRepeat, message, success } = this.state;
+    const {
+      username,
+      password,
+      passwordRepeat,
+      message,
+      success,
+      loading
+    } = this.state;
     return (
       <div className="register">
         <form
@@ -86,7 +108,11 @@ class Register extends React.Component {
             />
           </div>
           <div className="form-group">
-            <input type="submit" name="submit" value="Submit" />
+            <input
+              type="submit"
+              name="submit"
+              value={loading ? "Loading..." : "Submit"}
+            />
           </div>
         </form>
       </div>

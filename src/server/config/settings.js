@@ -1,3 +1,3 @@
 module.exports = {
-  secret: 'waffle barber dingo'
+  secret: process.env.LOREMASTER_SECRET
 };

@@ -22,7 +22,7 @@ class CharacterListInternal extends Component {
       <ul>
         <Characters characters={context.state.list} />
         <li>
-          <Link to="new">New Character</Link>
+          <Link to="/characters/new">New Character</Link>
         </li>
       </ul>
     );

@@ -17,7 +17,8 @@ class Login extends React.Component {
       password: "",
       success: false,
       message: false,
-      loggedIn: false
+      loggedIn: false,
+      loading: false
     };
   }
 
@@ -31,6 +32,7 @@ class Login extends React.Component {
 
   onSubmit = (event, handleLogin) => {
     event.preventDefault();
+    this.setState({ loading: true });
     fetch("/login", {
       method: "post",
       headers: {
@@ -41,6 +43,7 @@ class Login extends React.Component {
       res
         .json()
         .then(res => {
+          this.setState({ loading: false });
           if (res.success) {
             localStorage.setItem(
               settings.authToken,
@@ -54,7 +57,14 @@ class Login extends React.Component {
   };
 
   render() {
-    const { username, password, message, success, loggedIn } = this.state;
+    const {
+      username,
+      password,
+      message,
+      success,
+      loggedIn,
+      loading
+    } = this.state;
     if (loggedIn) return <Redirect to="/characters" />;
     else
       return (
@@ -82,7 +92,11 @@ class Login extends React.Component {
                   />
                 </div>
                 <div className="form-group">
-                  <input type="submit" name="submit" value="Submit" />
+                  <input
+                    type="submit"
+                    name="submit"
+                    value={loading ? "Loading..." : "Submit"}
+                  />
                 </div>
               </form>
             </div>
