@@ -1,9 +1,9 @@
-import React from "react";
-import { Redirect } from "react-router-dom";
-import { Subscribe } from "unstated";
-import AuthContainer from "./AuthContainer/AuthContainer";
-import Alert from "../common/Alert/Alert";
-import settings from "../../settings";
+import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { Subscribe } from 'unstated';
+import AuthContainer from './AuthContainer/AuthContainer';
+import Alert from '../common/Alert/Alert';
+import settings from '../../settings';
 
 class Login extends React.Component {
   constructor(props) {
@@ -13,8 +13,8 @@ class Login extends React.Component {
     this.changePassword = this.changePassword.bind(this);
 
     this.state = {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
       success: false,
       message: false,
       loggedIn: false,
@@ -33,10 +33,10 @@ class Login extends React.Component {
   onSubmit = (event, handleLogin) => {
     event.preventDefault();
     this.setState({ loading: true });
-    fetch("/login", {
-      method: "post",
+    fetch(settings.apiUrl + '/login', {
+      method: 'post',
       headers: {
-        "Content-Type": "application/json; charset=utf-8"
+        'Content-Type': 'application/json; charset=utf-8'
       },
       body: JSON.stringify(this.state)
     }).then(res =>
@@ -95,7 +95,7 @@ class Login extends React.Component {
                   <input
                     type="submit"
                     name="submit"
-                    value={loading ? "Loading..." : "Submit"}
+                    value={loading ? 'Loading...' : 'Submit'}
                   />
                 </div>
               </form>

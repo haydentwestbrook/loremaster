@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { Subscribe } from "unstated";
-import { Link } from "react-router-dom";
-import CharacterContainer from "../containers/CharacterContainer/CharacterContainer";
-import { Row, Column } from "../common/Markup/Markup";
-import Loading from "../Loading/Loading";
-import Authorize from "../Authentication/Authorize";
+import React, { Component } from 'react';
+import { Subscribe } from 'unstated';
+import { Link } from 'react-router-dom';
+import CharacterContainer from '../containers/CharacterContainer/CharacterContainer';
+import { Row, Column } from '../common/Markup/Markup';
+import Loading from '../Loading/Loading';
+import Authorize from '../Authentication/Authorize';
 
 class CharacterListInternal extends Component {
   constructor(props) {
@@ -31,10 +31,10 @@ class CharacterListInternal extends Component {
 
 const Characters = props => {
   const { characters } = props;
-  if (!characters) return "";
+  if (!characters) return '';
   return characters.map(char => (
-    <li key={char.id}>
-      <Link to={"characters/" + char.id}>{char.name}</Link>
+    <li key={char.num}>
+      <Link to={'characters/' + char.num}>{char.name}</Link>
     </li>
   ));
 };

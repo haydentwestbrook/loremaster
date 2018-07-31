@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { Subscribe } from "unstated";
-import FiveEContainer from "../containers/FiveEContainer/FiveEContainer";
-import CharacterContainer from "../containers/CharacterContainer/CharacterContainer";
-import Authorize from "../Authentication/Authorize";
-import { Row, Column } from "../common/Markup/Markup";
-import Loading from "../Loading/Loading";
-import CharInfo from "./CharInfo/CharInfo";
-import Abilities from "./Abilities/Abilities";
+import React, { Component } from 'react';
+import { Subscribe } from 'unstated';
+import FiveEContainer from '../containers/FiveEContainer/FiveEContainer';
+import CharacterContainer from '../containers/CharacterContainer/CharacterContainer';
+import Authorize from '../Authentication/Authorize';
+import { Row, Column } from '../common/Markup/Markup';
+import Loading from '../Loading/Loading';
+import CharInfo from './CharInfo/CharInfo';
+import Abilities from './Abilities/Abilities';
 
 class CharacterSheetInternal extends Component {
   constructor(props) {
@@ -18,8 +18,9 @@ class CharacterSheetInternal extends Component {
     this.update = this.update.bind(this);
   }
 
-  componentWillMount() {
-    this.props.context.loadCharacter(this.props.match.params.id);
+  componentDidMount() {
+    const id = this.props.match.params.id;
+    this.props.context.loadCharacter(parseInt(id));
   }
 
   update(state) {

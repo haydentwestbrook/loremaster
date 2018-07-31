@@ -1,10 +1,11 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const CharacterScheme = new mongoose.Schema({
+const CharacterSchema = new mongoose.Schema({
   name: String,
   data: String,
   deleted: Boolean,
-  _user: { type: Number, ref: "User" }
+  num: Number,
+  _user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 
-module.exports = mongoose.model("Character", CharacterScheme);
+module.exports = mongoose.model('Character', CharacterSchema);
