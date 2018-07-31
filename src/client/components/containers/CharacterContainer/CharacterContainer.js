@@ -1,7 +1,7 @@
-import React from 'react';
-import { Container } from 'unstated';
-import LocalStorageHelper from '../../helpers/LocalStorageHelper';
-import settings from '../../../settings';
+import React from "react";
+import { Container } from "unstated";
+import LocalStorageHelper from "../../helpers/LocalStorageHelper";
+import settings from "../../../settings";
 
 class CharacterContainer extends Container {
   constructor(props) {
@@ -17,26 +17,32 @@ class CharacterContainer extends Container {
     this.store = new LocalStorageHelper();
     this.state = {
       list: null,
-      character: null
+      character: null,
+      newCharNum: null
     };
   }
 
   getKey() {
-    return 'LM_1';
+    return "LM_1";
   }
 
   getNewCharacter() {
     const { id, token } = JSON.parse(localStorage.getItem(settings.authToken));
-    fetch(settings.apiUrl + '/characters/new', {
-      method: 'post',
+    fetch(settings.apiUrl + "/characters/new", {
+      method: "post",
       headers: {
-        'Content-Type': 'application/json; charset=utf-8'
+        "Content-Type": "application/json; charset=utf-8"
       },
       body: JSON.stringify({ userId: id, token: token })
     })
-      .then(res =>
-        res.json().then(res => this.setState({ character: res.character }))
-      )
+      .then(res => {
+        res.json().then(res =>
+          this.setState({
+            newCharNum: res.character.num,
+            character: JSON.parse(res.character.data)
+          })
+        );
+      })
       .catch(error => console.log(error));
   }
 
@@ -46,29 +52,33 @@ class CharacterContainer extends Container {
 
   loadCharacter(charNum) {
     const { id, token } = JSON.parse(localStorage.getItem(settings.authToken));
-    fetch(settings.apiUrl + '/characters/get', {
-      method: 'post',
+    fetch(settings.apiUrl + "/characters/get", {
+      method: "post",
       headers: {
-        'Content-Type': 'application/json; charset=utf-8'
+        "Content-Type": "application/json; charset=utf-8"
       },
       body: JSON.stringify({ userId: id, token: token, charNum: charNum })
     })
       .then(res =>
-        res
-          .json()
-          .then(res => this.setState({ character: JSON.parse(res.data) }))
+        res.json().then(res => {
+          console.log(res);
+          this.setState({
+            character: JSON.parse(res.data),
+            charNum: null
+          });
+        })
       )
       .catch(error => console.log(error));
   }
 
   loadCharacterList() {
     const { id, token } = JSON.parse(localStorage.getItem(settings.authToken));
-    fetch(settings.apiUrl + '/characters/get', {
-      method: 'post',
+    fetch(settings.apiUrl + "/characters/get", {
+      method: "post",
       headers: {
-        'Content-Type': 'application/json; charset=utf-8'
+        "Content-Type": "application/json; charset=utf-8"
       },
-      body: JSON.stringify({ userId: id, token: token, charNum: 'all' })
+      body: JSON.stringify({ userId: id, token: token, charNum: "all" })
     })
       .then(res => res.json().then(res => this.setState({ list: res })))
       .catch(error => console.log(error));
@@ -76,10 +86,10 @@ class CharacterContainer extends Container {
 
   saveCharacter(charNum, data) {
     const { id, token } = JSON.parse(localStorage.getItem(settings.authToken));
-    fetch(settings.apiUrl + '/characters/save', {
-      method: 'post',
+    fetch(settings.apiUrl + "/characters/save", {
+      method: "post",
       headers: {
-        'Content-Type': 'application/json; charset=utf-8'
+        "Content-Type": "application/json; charset=utf-8"
       },
       body: JSON.stringify({
         userId: id,
