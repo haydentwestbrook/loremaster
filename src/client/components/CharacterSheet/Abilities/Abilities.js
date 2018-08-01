@@ -1,6 +1,6 @@
 import React from "react";
-import Input from "../../common/Input/Input";
-import { Row, Column } from "../../common/Markup/Markup";
+import Ability from "./Ability";
+import { Column } from "../../common/Markup/Markup";
 
 const Abilities = props => {
   const { write, character, updateCharacter } = props;
@@ -11,23 +11,16 @@ const Abilities = props => {
     updateCharacter(Object.assign(character, updated));
   };
 
-  const getBonus = value => {
-    const bonus = Math.floor((value - 10) / 2);
-    return bonus < 0 ? bonus : "+" + bonus;
-  };
-
   const renderAbilities = Object.keys(abilities).map(key => {
     const value = abilities[key];
     return (
-      <div className="attribute" key={key}>
-        <Input
+      <div className="abilities" key={key}>
+        <Ability
+          value={value}
           label={key}
           write={write}
-          value={value}
           onChange={e => update({ [key]: e.target.value })}
-          validation="number"
         />
-        <Input write={false} value={getBonus(value)} />
       </div>
     );
   });

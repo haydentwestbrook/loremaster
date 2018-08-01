@@ -2,6 +2,7 @@ import React from "react";
 import { Container } from "unstated";
 import LocalStorageHelper from "../../helpers/LocalStorageHelper";
 import settings from "../../../settings";
+import mockCharacter from "../../../mocks/mockCharacter";
 
 class CharacterContainer extends Container {
   constructor(props) {
@@ -47,10 +48,12 @@ class CharacterContainer extends Container {
   }
 
   updateCharacter(state, key) {
-    this.setState({ character: state }).then(() => this.saveCharacter(key));
+    //this.setState({ character: state }).then(() => this.saveCharacter(key));
   }
 
   loadCharacter(charNum) {
+    if (settings.debug)
+      return this.setState({ character: mockCharacter, charNum: null });
     const { id, token } = JSON.parse(localStorage.getItem(settings.authToken));
     fetch(settings.apiUrl + "/characters/get", {
       method: "post",

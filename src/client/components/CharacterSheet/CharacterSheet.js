@@ -19,21 +19,15 @@ class CharacterSheetInternal extends Component {
 
   componentDidMount() {
     console.log("Did mount");
-  }
-
-  componentDidUpdate() {
     const context = this.props.context;
-    console.log("Did update");
-    if (!context.state.newCharNum) {
-      const id = this.props.match.params.id;
-      context.loadCharacter(parseInt(id));
-    }
+    const id = this.props.match.params.id;
+    context.loadCharacter(parseInt(id));
   }
 
   update(state) {
     const updateCharacter = this.props.context.updateCharacter;
     const id = this.props.match.params.id;
-    updateCharacter(state, id);
+    //updateCharacter(state, id);
   }
 
   render() {
