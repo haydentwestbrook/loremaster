@@ -9,12 +9,12 @@ const newCharacter = {
     playerName: ""
   },
   abilities: {
-    Strength: 10,
-    Desxterity: 10,
-    Constitution: 10,
-    Intelligence: 10,
-    Wisdom: 10,
-    Charisma: 10
+    strength: 10,
+    dexterity: 10,
+    constitution: 10,
+    intelligence: 10,
+    wisdom: 10,
+    charisma: 10
   }
 };
 

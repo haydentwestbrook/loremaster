@@ -1,6 +1,7 @@
 import React from "react";
 import Ability from "./Ability";
-import { Column } from "../../common/Markup/Markup";
+import AbilitiesModal from "./AbilitiesModal";
+import { Row, Column } from "../../common/Markup/Markup";
 
 const Abilities = props => {
   const { write, character, updateCharacter } = props;
@@ -11,21 +12,34 @@ const Abilities = props => {
     updateCharacter(Object.assign(character, updated));
   };
 
-  const renderAbilities = Object.keys(abilities).map(key => {
-    const value = abilities[key];
-    return (
-      <div className="abilities" key={key}>
+  const calculateAbilities = abilities => {
+    return abilities;
+  };
+
+  const renderAbilities = Object.keys(calculateAbilities(abilities)).map(
+    key => {
+      const value = abilities[key];
+      return (
         <Ability
+          key={key}
           value={value}
           label={key}
           write={write}
           onChange={e => update({ [key]: e.target.value })}
         />
-      </div>
-    );
-  });
+      );
+    }
+  );
 
-  return <Column num="1">{renderAbilities}</Column>;
+  return (
+    <Column num="1" className="abilities">
+      <Row>
+        <span>Abilities</span>
+        <AbilitiesModal abilities={abilities} write={write} update={update} />
+      </Row>
+      {renderAbilities}
+    </Column>
+  );
 };
 
 export default Abilities;

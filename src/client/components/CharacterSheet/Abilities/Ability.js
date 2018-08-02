@@ -3,13 +3,14 @@ import Input from "../../common/Input/Input";
 import { Row, Column } from "../../common/Markup/Markup";
 
 const Ability = props => {
-  const { write, value, label, onChange } = props;
+  const { value, label, onChange } = props;
 
   return (
     <div className="ability">
+      <span>{label}</span>
       <Input
         label={label}
-        write={write}
+        write={false}
         value={value}
         onChange={e => onChange(e)}
         validation="number"
@@ -28,7 +29,7 @@ const Bonus = props => {
     return bonus < 0 ? bonus : "+" + bonus;
   };
 
-  return <Input write={false} value={value} simple={true} />;
+  return <Input write={false} value={getBonus(value)} simple={true} />;
 };
 
 export default Ability;
