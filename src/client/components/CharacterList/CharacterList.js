@@ -11,13 +11,13 @@ class CharacterListInternal extends Component {
     super(props);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.context.loadCharacterList();
   }
 
   render() {
     const context = this.props.context;
-    if (!context) return <Loading />;
+    if (!context.state.list) return <Loading />;
     return (
       <ul>
         <Characters characters={context.state.list} />
@@ -33,8 +33,11 @@ const Characters = props => {
   const { characters } = props;
   if (!characters) return '';
   return characters.map(char => (
-    <li key={char.num}>
-      <Link to={'characters/' + char.num}>{char.name}</Link>
+    <li key={char.index}>
+      <div className="list__character">
+        <Link to={'characters/get/' + char.index}>{char.name}</Link>
+        <Link to={'characters/delete/' + char.index}>Delete</Link>
+      </div>
     </li>
   ));
 };

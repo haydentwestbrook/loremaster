@@ -5,33 +5,30 @@ import CharacterContainer from '../containers/CharacterContainer/CharacterContai
 import Authorize from '../Authentication/Authorize';
 import Loading from '../Loading/Loading';
 
-class NewCharacterInternal extends React.Component {
+class DeleteCharacterInternal extends React.Component {
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
-    this.props.context.getNewCharacter();
+    const index = this.props.match.params.index;
+    this.props.context.deleteCharacter(index);
   }
 
   render() {
-    const context = this.props.context;
-    return context.state.newIndex !== null ? (
-      <Redirect to={'/characters/get/' + context.state.newIndex} />
-    ) : (
-      <Loading />
-    );
+    const index = this.props.match.params.index;
+    <Redirect to={'/characters/get/' + index} />;
   }
 }
 
-const NewCharacterWrapper = props => {
+const DeleteCharacterWrapper = props => {
   return (
     <Authorize redirect={true}>
       <Subscribe to={[CharacterContainer]}>
-        {context => <NewCharacterInternal {...props} context={context} />}
+        {context => <DeleteCharacterInternal {...props} context={context} />}
       </Subscribe>
     </Authorize>
   );
 };
 
-export default NewCharacterWrapper;
+export default DeleteCharacterWrapper;

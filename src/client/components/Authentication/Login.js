@@ -45,10 +45,7 @@ class Login extends React.Component {
         .then(res => {
           this.setState({ loading: false });
           if (res.success) {
-            localStorage.setItem(
-              settings.authToken,
-              JSON.stringify({ token: res.token, id: res.id })
-            );
+            localStorage.setItem(settings.authToken, res.token);
             this.setState({ loggedIn: true });
           } else this.setState(res);
         })

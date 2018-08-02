@@ -1,8 +1,8 @@
-import React from "react";
-import { Container } from "unstated";
-import LocalStorageHelper from "../../helpers/LocalStorageHelper";
-import settings from "../../../settings";
-import mockCharacter from "../../../mocks/mockCharacter";
+import React from 'react';
+import { Container } from 'unstated';
+import LocalStorageHelper from '../../helpers/LocalStorageHelper';
+import settings from '../../../settings';
+import mockCharacter from '../../../mocks/mockCharacter';
 
 class CharacterContainer extends Container {
   constructor(props) {
@@ -11,35 +11,29 @@ class CharacterContainer extends Container {
     this.updateCharacter = this.updateCharacter.bind(this);
     this.loadCharacter = this.loadCharacter.bind(this);
     this.saveCharacter = this.saveCharacter.bind(this);
-    this.getKey = this.getKey.bind(this);
     this.loadCharacterList = this.loadCharacterList.bind(this);
     this.getNewCharacter = this.getNewCharacter.bind(this);
 
-    this.store = new LocalStorageHelper();
     this.state = {
       list: null,
       character: null,
-      newCharNum: null
+      newIndex: null
     };
   }
 
-  getKey() {
-    return "LM_1";
-  }
-
   getNewCharacter() {
-    const { id, token } = JSON.parse(localStorage.getItem(settings.authToken));
-    fetch(settings.apiUrl + "/characters/new", {
-      method: "post",
+    const token = localStorage.getItem(settings.authToken);
+    fetch(settings.apiUrl + '/characters/new', {
+      method: 'post',
       headers: {
-        "Content-Type": "application/json; charset=utf-8"
+        'Content-Type': 'application/json; charset=utf-8'
       },
-      body: JSON.stringify({ userId: id, token: token })
+      body: JSON.stringify({ token: token })
     })
       .then(res => {
         res.json().then(res =>
           this.setState({
-            newCharNum: res.character.num,
+            newIndex: res.character.index,
             character: JSON.parse(res.character.data)
           })
         );
@@ -47,58 +41,72 @@ class CharacterContainer extends Container {
       .catch(error => console.log(error));
   }
 
-  updateCharacter(state, key) {
-    //this.setState({ character: state }).then(() => this.saveCharacter(key));
+  updateCharacter(state, index) {
+    this.setState({ character: state }).then(() =>
+      this.saveCharacter(index, state)
+    );
   }
 
-  loadCharacter(charNum) {
+  loadCharacter(index) {
     if (settings.debug)
-      return this.setState({ character: mockCharacter, charNum: null });
-    const { id, token } = JSON.parse(localStorage.getItem(settings.authToken));
-    fetch(settings.apiUrl + "/characters/get", {
-      method: "post",
+      return this.setState({ character: mockCharacter, newIndex: null });
+    const token = localStorage.getItem(settings.authToken);
+    fetch(settings.apiUrl + '/characters/get', {
+      method: 'post',
       headers: {
-        "Content-Type": "application/json; charset=utf-8"
+        'Content-Type': 'application/json; charset=utf-8'
       },
-      body: JSON.stringify({ userId: id, token: token, charNum: charNum })
+      body: JSON.stringify({ token: token, index: index })
     })
       .then(res =>
-        res.json().then(res => {
-          console.log(res);
+        res.json().then(res =>
           this.setState({
             character: JSON.parse(res.data),
-            charNum: null
-          });
-        })
+            newIndex: null
+          })
+        )
       )
       .catch(error => console.log(error));
   }
 
   loadCharacterList() {
-    const { id, token } = JSON.parse(localStorage.getItem(settings.authToken));
-    fetch(settings.apiUrl + "/characters/get", {
-      method: "post",
+    const token = localStorage.getItem(settings.authToken);
+    fetch(settings.apiUrl + '/characters/get', {
+      method: 'post',
       headers: {
-        "Content-Type": "application/json; charset=utf-8"
+        'Content-Type': 'application/json; charset=utf-8'
       },
-      body: JSON.stringify({ userId: id, token: token, charNum: "all" })
+      body: JSON.stringify({ token: token, index: 'all' })
     })
       .then(res => res.json().then(res => this.setState({ list: res })))
       .catch(error => console.log(error));
   }
 
-  saveCharacter(charNum, data) {
-    const { id, token } = JSON.parse(localStorage.getItem(settings.authToken));
-    fetch(settings.apiUrl + "/characters/save", {
-      method: "post",
+  saveCharacter(index, data) {
+    const token = localStorage.getItem(settings.authToken);
+    fetch(settings.apiUrl + '/characters/save', {
+      method: 'post',
       headers: {
-        "Content-Type": "application/json; charset=utf-8"
+        'Content-Type': 'application/json; charset=utf-8'
       },
       body: JSON.stringify({
-        userId: id,
         token: token,
-        charNum: charNum,
+        index: index,
         data: data
+      })
+    }).catch(error => console.log(error));
+  }
+
+  deleteCharacter(index) {
+    const token = localStorage.getItem(settings.authToken);
+    fetch(settings.apiUrl + '/characters/delete', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      },
+      body: JSON.stringify({
+        token: token,
+        index: index
       })
     }).catch(error => console.log(error));
   }

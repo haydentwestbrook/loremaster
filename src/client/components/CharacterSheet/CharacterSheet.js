@@ -1,38 +1,45 @@
-import React, { Component } from "react";
-import { Subscribe } from "unstated";
-import FiveEContainer from "../containers/FiveEContainer/FiveEContainer";
-import CharacterContainer from "../containers/CharacterContainer/CharacterContainer";
-import Authorize from "../Authentication/Authorize";
-import { Row, Column } from "../common/Markup/Markup";
-import Loading from "../Loading/Loading";
-import CharInfo from "./CharInfo/CharInfo";
-import Abilities from "./Abilities/Abilities";
+import React, { Component } from 'react';
+import { Subscribe } from 'unstated';
+import FiveEContainer from '../containers/FiveEContainer/FiveEContainer';
+import CharacterContainer from '../containers/CharacterContainer/CharacterContainer';
+import Authorize from '../Authentication/Authorize';
+import { Row, Column } from '../common/Markup/Markup';
+import Loading from '../Loading/Loading';
+import CharInfo from './CharInfo/CharInfo';
+import Abilities from './Abilities/Abilities';
 
 class CharacterSheetInternal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      write: true
+      write: true,
+      error: false
     };
     this.update = this.update.bind(this);
   }
 
   componentDidMount() {
-    console.log("Did mount");
     const context = this.props.context;
-    const id = this.props.match.params.id;
-    context.loadCharacter(parseInt(id));
+    const index = parseInt(this.props.match.params.index);
+    if (index) {
+      context.loadCharacter(index);
+    } else {
+      this.setState({ error: true });
+    }
   }
 
   update(state) {
     const updateCharacter = this.props.context.updateCharacter;
-    const id = this.props.match.params.id;
-    //updateCharacter(state, id);
+    const index = parseInt(this.props.match.params.index);
+    if (index) {
+      updateCharacter(state, index);
+    } else {
+      this.setState({ error: true });
+    }
   }
 
   render() {
-    console.log("RENDER CharacterSheet");
-    const { write } = this.state;
+    const { write, error } = this.state;
     const { context } = this.props;
     if (!context.state.character) return <Loading />;
     const character = context.state.character;

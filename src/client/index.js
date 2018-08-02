@@ -18,8 +18,8 @@ ReactDOM.render(
       <App>
         <Route exact path="/" component={Main} />
         <Route exact path="/characters" component={CharacterList} />
-        <Route exact path="/characters/new" component={NewCharacter} />
-        <Route exact path="/characters/:id" component={CharacterSheet} />
+        <Route path="/characters/get/:index" component={CharacterSheet} />
+        <Route path="/characters/new" component={NewCharacter} />
         <Route exact path="/logout" component={Logout} />
       </App>
     </Provider>

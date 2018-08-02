@@ -1,11 +1,11 @@
-var mongoose = require('mongoose');
-var passport = require('passport');
-var settings = require('../config/settings');
+const mongoose = require('mongoose');
+const passport = require('passport');
+const settings = require('../config/settings');
 require('../config/passport')(passport);
-var express = require('express');
-var jwt = require('jsonwebtoken');
-var router = express.Router();
-var User = require('../models/user');
+const express = require('express');
+const jwt = require('jsonwebtoken');
+const router = express.Router();
+const User = require('../models/user');
 
 router.post('/login', (req, res) => {
   User.findOne(
@@ -22,8 +22,10 @@ router.post('/login', (req, res) => {
       } else {
         user.comparePassword(req.body.password, isMatch => {
           if (isMatch && !err) {
-            var token = jwt.sign(user.toJSON(), settings.secret);
-            res.json({ success: true, token: token, id: user._id });
+            const token = jwt.sign(user.toJSON(), settings.auth.secret, {
+              expiresIn: settings.auth.expiresIn
+            });
+            res.json({ success: true, token: token });
           } else {
             res.status(401).send({
               success: false,

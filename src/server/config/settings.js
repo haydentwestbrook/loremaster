@@ -1,4 +1,7 @@
 module.exports = {
-  secret: process.env.LOREMASTER_SECRET,
-  port: process.env.PORT || 9000
+  port: process.env.PORT || 9000,
+  auth: {
+    secret: process.env.LOREMASTER_SECRET,
+    expiresIn: 86400
+  }
 };
