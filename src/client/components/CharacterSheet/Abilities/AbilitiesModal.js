@@ -1,9 +1,10 @@
 import React from "react";
 import Modal from "../../common/Modal/Modal";
 import Input from "../../common/Input/Input";
+import InfoString from "../../common/InfoString/InfoString";
 
 const AbilitiesModal = props => {
-  const id = "abilities-modal";
+  const id = "modal-abilities";
   const { update, abilities, write } = props;
 
   if (!write) return null;
@@ -25,7 +26,7 @@ const AbilitiesModal = props => {
 
   return (
     <React.Fragment>
-      <label className="edit" htmlFor={"modal-" + id}>
+      <label className="edit" htmlFor={id}>
         E
       </label>
       <Modal id={id}>

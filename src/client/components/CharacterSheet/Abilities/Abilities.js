@@ -16,20 +16,20 @@ const Abilities = props => {
     return abilities;
   };
 
-  const renderAbilities = Object.keys(calculateAbilities(abilities)).map(
-    key => {
-      const value = abilities[key];
-      return (
-        <Ability
-          key={key}
-          value={value}
-          label={key}
-          write={write}
-          onChange={e => update({ [key]: e.target.value })}
-        />
-      );
-    }
-  );
+  const keys = Object.keys(calculateAbilities(abilities));
+  const renderAbilities = keys.map(key => {
+    const value = abilities[key];
+    return (
+      <Ability
+        index={keys.indexOf(key)}
+        key={key}
+        value={value}
+        label={key}
+        write={write}
+        onChange={e => update({ [key]: e.target.value })}
+      />
+    );
+  });
 
   return (
     <Column num="1" className="abilities">
