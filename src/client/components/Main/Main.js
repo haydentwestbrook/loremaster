@@ -4,7 +4,7 @@ import Register from "../Authentication/Register";
 
 const Main = () => {
   return (
-    <div className="main">
+    <div className="splash">
       <h1>Login</h1>
       <Login />
       <h1>Or register</h1>

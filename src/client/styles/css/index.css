@@ -1,7 +1,20 @@
-@import '../../../../node_modules/papercss/dist/paper.min.css';
+@import "../../../../node_modules/papercss/dist/paper.min.css";
 .main {
   max-width: 1200px;
-  margin: auto;
+  padding: 20px;
+}
+
+.splash {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+.splash .btn {
+  margin-top: 10px;
+}
+.splash .form-group {
+  margin-top: 10px;
 }
 
 .loading {
@@ -23,6 +36,39 @@
 }
 .form-group .input {
   display: block;
+}
+.character-list {
+  list-style-type: none;
+}
+
+.character-list__item {
+  display: flex;
+  flex-direction: row;
+}
+
+.character-list__name {
+  padding: 5px;
+  margin: 5px 20px;
+}
+
+.character-list__delete {
+  margin: 5px 20px;
+}
+
+.character-list__new {
+  margin: 5px 20px;
+}
+
+ul li {
+  text-indent: 0;
+}
+
+ul li::before {
+  content: "";
+}
+
+a {
+  background-image: none;
 }
 
 /*# sourceMappingURL=index.css.map */

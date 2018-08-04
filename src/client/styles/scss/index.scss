@@ -1,6 +1,19 @@
-@import '../../../../node_modules/papercss/dist/paper.min.css';
-@import 'variables';
-@import './components/main';
-@import './components/loading';
-@import './components/common/markup';
-@import './components/common/input';
+@import "../../../../node_modules/papercss/dist/paper.min.css";
+@import "variables";
+@import "./components/main";
+@import "./components/loading";
+@import "./components/common/markup";
+@import "./components/common/input";
+@import "./components/characters/characterList/characterList";
+
+ul li {
+  text-indent: 0;
+}
+
+ul li::before {
+  content: "";
+}
+
+a {
+  background-image: none;
+}

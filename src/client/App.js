@@ -22,9 +22,11 @@ export default class App extends Component {
     return (
       <div className="app">
         <Navbar />
-        <Provider inject={containers}>
-          {loaded ? this.props.children : <Loading />}
-        </Provider>
+        <div className="main">
+          <Provider inject={containers}>
+            {loaded ? this.props.children : <Loading />}
+          </Provider>
+        </div>
       </div>
     );
   }

@@ -1,4 +1,19 @@
 .main {
   max-width: $max-page-width;
-  margin: auto;
+  padding: $padding-large;
+}
+
+.splash {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+
+  .btn {
+    margin-top: $margin;
+  }
+
+  .form-group {
+    margin-top: $margin;
+  }
 }

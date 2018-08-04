@@ -1,0 +1,21 @@
+.character-list {
+  list-style-type: none;
+}
+
+.character-list__item {
+  display: flex;
+  flex-direction: row;
+}
+
+.character-list__name {
+  padding: $padding-small;
+  margin: $margin-small $margin-large;
+}
+
+.character-list__delete {
+  margin: $margin-small $margin-large;
+}
+
+.character-list__new {
+  margin: $margin-small $margin-large;
+}
