@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Subscribe } from 'unstated';
-import CharacterContainer from '../containers/CharacterContainer/CharacterContainer';
-import Authorize from '../Authentication/Authorize';
-import Loading from '../Loading/Loading';
+import CharacterContainer from '../../containers/CharacterContainer/CharacterContainer';
+import Authorize from '../../Authentication/Authorize';
+import Loading from '../../Loading/Loading';
 
 class NewCharacterInternal extends React.Component {
   constructor(props) {

@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { Subscribe } from "unstated";
-import { Link } from "react-router-dom";
-import CharacterContainer from "../containers/CharacterContainer/CharacterContainer";
-import { Row, Column } from "../common/Markup/Markup";
-import Loading from "../Loading/Loading";
-import Authorize from "../Authentication/Authorize";
+import React, { Component } from 'react';
+import { Subscribe } from 'unstated';
+import { Link } from 'react-router-dom';
+import CharacterContainer from '../../containers/CharacterContainer/CharacterContainer';
+import { Row, Column } from '../../common/Markup/Markup';
+import Loading from '../../Loading/Loading';
+import Authorize from '../../Authentication/Authorize';
 
 class CharacterListInternal extends Component {
   constructor(props) {
@@ -22,7 +22,9 @@ class CharacterListInternal extends Component {
       <ul className="character-list">
         <Characters characters={context.state.list} />
         <li className="character-list__new">
-          <Link to="/characters/new">Create Character</Link>
+          <Link className="paper-btn btn-success" to="/characters/new">
+            Create Character
+          </Link>
         </li>
       </ul>
     );
@@ -31,18 +33,18 @@ class CharacterListInternal extends Component {
 
 const Characters = props => {
   const { characters } = props;
-  if (!characters) return "";
+  if (!characters) return '';
   return characters.map(char => (
-    <li key={char.index} className="character-list__item">
+    <li key={char.index} className="character-list__item border">
       <Link
-        to={"characters/get/" + char.index}
+        to={'characters/get/' + char.index}
         className="character-list__name"
       >
         {char.name}
       </Link>
       <Link
-        to={"characters/delete/" + char.index}
-        className="character-list__delete"
+        to={'characters/delete/' + char.index}
+        className="character-list__delete paper-btn btn-danger"
       >
         Delete
       </Link>

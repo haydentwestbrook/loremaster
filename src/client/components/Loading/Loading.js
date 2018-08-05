@@ -1,7 +1,14 @@
 import React from 'react';
 
 const Loading = props => {
-  if (props.loaded) return null;
+  const { loaded, type } = props;
+  if (loaded) return null;
+  if (type === 'small')
+    return (
+      <div className="loading">
+        <h3>Loading...</h3>
+      </div>
+    );
   return (
     <div className="loading">
       <h1>Loading...</h1>

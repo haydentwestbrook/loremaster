@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Subscribe } from 'unstated';
-import CharacterContainer from '../containers/CharacterContainer/CharacterContainer';
-import Authorize from '../Authentication/Authorize';
-import Loading from '../Loading/Loading';
+import CharacterContainer from '../../containers/CharacterContainer/CharacterContainer';
+import Authorize from '../../Authentication/Authorize';
+import Loading from '../../Loading/Loading';
 
 class DeleteCharacterInternal extends React.Component {
   constructor(props) {
@@ -16,8 +16,7 @@ class DeleteCharacterInternal extends React.Component {
   }
 
   render() {
-    const index = this.props.match.params.index;
-    <Redirect to={'/characters/get/' + index} />;
+    return <Redirect to={'/characters/'} />;
   }
 }
 

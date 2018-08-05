@@ -1,56 +1,63 @@
-import React, { Component } from "react";
-import { Subscribe } from "unstated";
-import FiveEContainer from "../../containers/FiveEContainer/FiveEContainer";
-import Modal from "../../common/Modal/Modal";
-import Loading from "../../Loading/Loading";
+import React, { Component } from 'react';
+import { Subscribe } from 'unstated';
+import FiveEContainer from '../../containers/FiveEContainer/FiveEContainer';
+import Modal from '../../common/Modal/Modal';
+import Loading from '../../Loading/Loading';
+import CharacterContainer from '../../containers/CharacterContainer/CharacterContainer';
 
-class InfoStringInternal extends Component {
+class InfoString extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       loaded: true,
-      body: null
+      data: null
     };
-  }
 
-  componentDidMount() {
-    const { api, children, search } = this.props;
-    //api.get(search).then(res => this.setState({ body: res.desc }));
+    this.loadData = this.loadData.bind(this);
   }
 
   getBody() {
-    const { loaded, body } = this.state;
-    if (loaded) {
-      return <p className="modal-text">{body}</p>;
+    const Template = this.props.Template;
+    const { loaded, data } = this.state;
+    if (loaded && data) {
+      return <Template data={data} />;
     } else {
-      return <Loading />;
+      return <Loading type="small" />;
+    }
+  }
+
+  loadData(api) {
+    if (!this.state.data) {
+      const { search } = this.props;
+      this.setState({ loaded: false });
+      api.get(search).then(res => this.setState({ loaded: true, data: res }));
     }
   }
 
   render() {
-    const children = props.children;
-    const id = "info-string-" + children;
+    const children = this.props.children;
+    const id = 'info-string-' + children;
     return (
-      <React.Fragment>
-        <label className="info-string" htmlFor={id}>
-          {children}
-        </label>
-        <Modal id={id}>
-          <h4 className="modal-title">{children}</h4>
-          {getBody()}
-        </Modal>
-      </React.Fragment>
+      <Subscribe to={[FiveEContainer]}>
+        {api => (
+          <React.Fragment>
+            <label
+              onClick={() => this.loadData(api)}
+              className="info-string text-secondary"
+              htmlFor={id}
+            >
+              {children}
+            </label>
+            <Modal id={id}>
+              <h4 className="modal-title">{children}</h4>
+              {this.getBody()}
+            </Modal>
+          </React.Fragment>
+        )}
+      </Subscribe>
     );
   }
 }
 
-const InfoStringWrapper = props => {
-  return (
-    <Subscribe to={[FiveEContainer]}>
-      {api => <InfoStringInternal {...props} api={api} />}}
-    </Subscribe>
-  );
-};
-
-export default InfoStringWrapper;
+export default InfoString;

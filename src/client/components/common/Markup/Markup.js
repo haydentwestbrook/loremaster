@@ -14,7 +14,7 @@ const Column = props => {
       className={
         'col ' +
         (num
-          ? `col-${num}`
+          ? `col-${num} `
           : (lg ? `lg-${lg} ` : '') +
             (md ? `md-${md} ` : '') +
             (sm ? `sm-${sm} ` : '')) +
@@ -30,15 +30,18 @@ const Collapsible = props => {
   const { label, id, checked } = props;
   return (
     <Column num="12">
-    <div className="collapsible">
-    <input id={id} type="checkbox" name="collapsible" defaultChecked={checked}/>
-    <label htmlFor={id}>{label}</label>
-    <div className="collapsible-body">
-      {props.children}
-    </div>
-  </div>
-  </Column>
-  )
-}
+      <div className="collapsible">
+        <input
+          id={id}
+          type="checkbox"
+          name="collapsible"
+          defaultChecked={checked}
+        />
+        <label htmlFor={id}>{label}</label>
+        <div className="collapsible-body">{props.children}</div>
+      </div>
+    </Column>
+  );
+};
 
 export { Row, Column, Collapsible };

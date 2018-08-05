@@ -1,0 +1,11 @@
+.ability {
+  margin-bottom: $margin-small;
+}
+
+.ability__value {
+  display: flex;
+
+  input {
+    max-width: 50%;
+  }
+}

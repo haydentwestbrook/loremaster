@@ -1,0 +1,19 @@
+.row {
+  margin-bottom: $margin-small;
+}
+
+.form-group {
+  width: 100%;
+}
+
+ul li {
+  text-indent: 0;
+}
+
+ul li::before {
+  content: none;
+}
+
+a {
+  background-image: none;
+}

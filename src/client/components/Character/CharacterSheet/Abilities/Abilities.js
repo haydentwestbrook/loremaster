@@ -1,7 +1,7 @@
-import React from "react";
-import Ability from "./Ability";
-import AbilitiesModal from "./AbilitiesModal";
-import { Row, Column } from "../../common/Markup/Markup";
+import React from 'react';
+import Ability from './Ability';
+import AbilitiesModal from './AbilitiesModal';
+import { Row, Column } from '../../../common/Markup/Markup';
 
 const Abilities = props => {
   const { write, character, updateCharacter } = props;
@@ -26,7 +26,6 @@ const Abilities = props => {
         value={value}
         label={key}
         write={write}
-        onChange={e => update({ [key]: e.target.value })}
       />
     );
   });

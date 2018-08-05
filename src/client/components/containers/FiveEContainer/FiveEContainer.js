@@ -7,7 +7,6 @@ class FiveEContainer extends Container {
   constructor(props) {
     super(props);
 
-    this.callApi = this.callApi.bind(this);
     this.get = this.get.bind(this);
     this.buildUrl = this.buildUrl.bind(this);
     this.handleApiError = this.handleApiError.bind(this);
@@ -29,21 +28,20 @@ class FiveEContainer extends Container {
     return url;
   }
 
-  callApi(url) {
-    this.setState({ fetching: true, data: null });
-    fetch(url).then(res => {
-      res.json().then(res => {
-        this.setState({ fetching: false, data: res });
-      }, this.handleApiError);
-    }, this.handleApiError);
-  }
-
   handleApiError() {
     console.log('Api call failed');
   }
 
   get(urlObj) {
-    this.callApi(this.buildUrl(urlObj));
+    return new Promise((resolve, reject) => {
+      this.setState({ fetching: true });
+      fetch(this.buildUrl(urlObj)).then(res => {
+        res.json().then(res => {
+          this.setState({ fetching: false });
+          resolve(res);
+        }, this.handleApiError);
+      }, this.handleApiError);
+    });
   }
 }
 

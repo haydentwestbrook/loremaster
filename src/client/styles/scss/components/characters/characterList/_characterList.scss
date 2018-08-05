@@ -5,17 +5,22 @@
 .character-list__item {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $margin-small;
 }
 
 .character-list__name {
-  padding: $padding-small;
-  margin: $margin-small $margin-large;
+  padding: $padding-large;
+  width: 100%;
 }
 
 .character-list__delete {
+  display: flex;
   margin: $margin-small $margin-large;
 }
 
 .character-list__new {
+  display: flex;
   margin: $margin-small $margin-large;
 }

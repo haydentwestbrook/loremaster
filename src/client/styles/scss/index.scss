@@ -1,19 +1,15 @@
-@import "../../../../node_modules/papercss/dist/paper.min.css";
-@import "variables";
-@import "./components/main";
-@import "./components/loading";
-@import "./components/common/markup";
-@import "./components/common/input";
-@import "./components/characters/characterList/characterList";
-
-ul li {
-  text-indent: 0;
-}
-
-ul li::before {
-  content: "";
-}
-
-a {
-  background-image: none;
-}
+@import '../../../../node_modules/papercss/dist/paper.min.css';
+@import '../../../../node_modules/@fortawesome/fontawesome-free/css/all.css';
+@import 'variables';
+@import 'mixins';
+@import 'overwrite';
+@import './components/main';
+@import './components/loading';
+@import './components/common/markup';
+@import './components/common/input';
+@import './components/common/infoString';
+@import './components/common/modal';
+@import './components/characters/characterList/characterList';
+@import './components/characters/characterSheet/characterSheet';
+@import './components/characters/characterSheet/abilities';
+@import './components/characters/characterSheet/charInfo';

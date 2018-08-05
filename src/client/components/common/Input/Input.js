@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class Input extends Component {
   constructor(props) {
@@ -17,9 +17,9 @@ class Input extends Component {
     if (!validation) onChange(e);
     else {
       const v = e.target.value;
-      if (Number(v) && validation === "number") this.handleSuccess(e);
-      else if (Boolean(v) && validation === "boolean") this.handleSuccess(e);
-      else if (typeof validation === "function" && validation(v))
+      if (Number(v) && validation === 'number') this.handleSuccess(e);
+      else if (Boolean(v) && validation === 'boolean') this.handleSuccess(e);
+      else if (typeof validation === 'function' && validation(v))
         this.handleSuccess(e);
       else this.handleError(e);
     }
@@ -39,7 +39,7 @@ class Input extends Component {
     if (onError) return onError;
     return (
       <span className="input__error">
-        {" "}
+        {' '}
         value must be a {String(validation)}
       </span>
     );
@@ -54,10 +54,10 @@ class Input extends Component {
           <input
             disabled={!write}
             className={
-              "input input-block" + (error ? " alert alert-danger" : "")
+              'input input-block' + (error ? ' alert alert-danger' : '')
             }
             type="text"
-            value={error ? "" : value}
+            value={error ? '' : value}
             onChange={e => {
               this.handleChange(e);
             }}
@@ -70,9 +70,9 @@ class Input extends Component {
       <div className="form-group">
         <input
           disabled={!write}
-          className={"input input-block" + (error ? " alert alert-danger" : "")}
+          className={'input input-block' + (error ? ' alert alert-danger' : '')}
           type="text"
-          value={error ? "" : value}
+          value={error ? '' : value}
           onChange={e => {
             this.handleChange(e);
           }}
