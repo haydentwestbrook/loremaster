@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { Subscribe } from 'unstated';
-import _ from 'lodash';
-import FiveEContainer from '../../../containers/FiveEContainer/FiveEContainer';
-import Modal from '../../../common/Modal/Modal';
-import Loading from '../../../Loading/Loading';
-import Input from '../../../common/Input/Input';
-import InfoString from '../../../common/InfoString/InfoString';
-import { Collapsible } from '../../../common/Markup/Markup';
+import React, { Component } from "react";
+import { Subscribe } from "unstated";
+import _ from "lodash";
+import FiveEContainer from "../../../containers/FiveEContainer/FiveEContainer";
+import Modal from "../../../common/Modal/Modal";
+import Loading from "../../../Loading/Loading";
+import Input from "../../../common/Input/Input";
+import InfoString from "../../../common/InfoString/InfoString";
+import { Collapsible } from "../../../common/Markup/Markup";
 
 class RaceModal extends Component {
   constructor(props) {
@@ -14,7 +14,8 @@ class RaceModal extends Component {
 
     this.state = {
       loaded: true,
-      raceData: []
+      raceData: [],
+      count: 0
     };
 
     this.tempRaceData = [];
@@ -27,23 +28,29 @@ class RaceModal extends Component {
   loadData(api) {
     if (this.state.raceData.length < 1) {
       this.setState({ loaded: false });
-      api.get({ section: 'races' }).then(res =>
+      api.get({ section: "races" }).then(res => {
+        this.setState({ count: res.count });
         _.forEach(res.results, res => {
           api.getUrl(res.url).then(res => {
+            this.setState(state => {
+              return { count: state.count + res.subraces.length };
+            });
             let race = Object.assign({}, res, { subraces: [] });
-            console.log(race);
-            if (res.subraces.length < 1) {
-              this.setState(
-                state => {
-                  raceData: state.raceData.concat(race);
-                },
-                () => {}
-              );
-            }
-            this.getSubraces(race, res.subraces, api);
+            this.setState(
+              state => {
+                return {
+                  count: state.count - 1,
+                  raceData: state.raceData.concat(race),
+                  loaded: state.count - 1 === 0
+                };
+              },
+              () => {
+                this.getSubraces(race, res.subraces, api);
+              }
+            );
           });
-        })
-      );
+        });
+      });
     }
   }
 
@@ -53,32 +60,45 @@ class RaceModal extends Component {
         if (res) {
           race.subraces.push(res);
         }
+        this.setState(state => {
+          return {
+            count: state.count - 1,
+            loaded: state.count - 1 === 0
+          };
+        });
       });
     });
-    console.log(this.state.raceData);
   }
-  // this.setState((state) => ({
-  //   raceData: Object.assign(state.raceData, {race}, )
-  // }));
 
   getBody(api) {
-    if (!this.state.loaded || !this.state.racesData) {
+    if (!this.state.loaded || !this.state.raceData) {
       return <Loading type="small" />;
     } else {
-      const races = this.state.racesData;
+      const races = this.state.raceData;
       return races.map(race => {
-        const { name, url } = race;
-        return (
-          <Collapsible key={name} id={'race-modal-' + name} label={name}>
-            <RaceDetails race={race} api={api} />
-          </Collapsible>
-        );
+        if (race.subraces.length > 0) {
+          return race.subraces.map(subrace => {
+            const { name } = subrace;
+            return (
+              <Collapsible key={name} id={"race-modal-" + name} label={name}>
+                <RaceDetails race={race} subrace={subrace} api={api} />
+              </Collapsible>
+            );
+          });
+        } else {
+          const { name } = race;
+          return (
+            <Collapsible key={name} id={"race-modal-" + name} label={name}>
+              <RaceDetails race={race} api={api} />
+            </Collapsible>
+          );
+        }
       });
     }
   }
 
   render() {
-    const id = 'modal-race';
+    const id = "modal-race";
     const { write, info } = this.props;
 
     if (!write) return null;
@@ -102,7 +122,7 @@ class RaceModal extends Component {
   }
 }
 
-class RaceDetail extends Component {
+class RaceDetails extends Component {
   constructor(props) {
     super(props);
 
