@@ -14,70 +14,80 @@ class RaceModal extends Component {
 
     this.state = {
       loaded: true,
-      raceData: [],
-      count: 0
+      races: [],
+      subraces: []
     };
 
-    this.tempRaceData = [];
-
     this.getBody = this.getBody.bind(this);
-    this.loadData = this.loadData.bind(this);
-    this.getSubraces = this.getSubraces.bind(this);
+    this.loadRaces = this.loadRaces.bind(this);
+    this.loadRace = this.loadRace.bind(this);
+    this.loadSubraces = this.loadSubraces.bind(this);
+    this.loadSubrace = this.loadSubrace.bind(this);
+    this.matchSubraces = this.matchSubraces.bind(this);
   }
 
   loadData(api) {
-    if (this.state.raceData.length < 1) {
-      this.setState({ loaded: false });
+    this.loadRaces(api);
+    this.loadSubraces(api);
+  }
+
+  loadRaces(api) {
+    if (this.state.races.length < 1) {
+      //this.setState({ loaded: false });
       api.get({ section: "races" }).then(res => {
-        this.setState({ count: res.count });
-        _.forEach(res.results, res => {
-          api.getUrl(res.url).then(res => {
-            this.setState(state => {
-              return { count: state.count + res.subraces.length };
-            });
-            let race = Object.assign({}, res, { subraces: [] });
-            this.setState(
-              state => {
-                return {
-                  count: state.count - 1,
-                  raceData: state.raceData.concat(race),
-                  loaded: state.count - 1 === 0
-                };
-              },
-              () => {
-                this.getSubraces(race, res.subraces, api);
-              }
-            );
-          });
+        _.forEach(res.results, race => {
+          this.loadRace(race, api);
         });
       });
     }
   }
 
-  getSubraces(race, subraces, api) {
-    _.forEach(subraces, subrace => {
-      api.getUrl(subrace.url).then(res => {
-        if (res) {
-          race.subraces.push(res);
-        }
-        this.setState(state => {
-          return {
-            count: state.count - 1,
-            loaded: state.count - 1 === 0
-          };
+  loadRace(race, api) {
+    api.getUrl(race.url).then(res => {
+      this.setState(state => {
+        return { races: state.races.concat(res), loaded: true };
+      });
+    });
+  }
+
+  loadSubraces(api) {
+    if (this.state.subraces.length < 1) {
+      //this.setState({ loaded: false });
+      api.get({ section: "subraces" }).then(res => {
+        _.forEach(res.results, subrace => {
+          this.loadSubrace(subrace, api);
         });
+      });
+    }
+  }
+
+  loadSubrace(subrace, api) {
+    api.getUrl(subrace.url).then(res => {
+      this.setState(state => {
+        return { subraces: state.subraces.concat(res), loaded: true };
+      });
+    });
+  }
+
+  matchSubraces(race) {
+    const subraces = this.state.subraces;
+    return race.subraces.map(subraceA => {
+      _.forEach(subraces, subraceB => {
+        if (subraceA.name === subraceB.name) {
+          return subraceB;
+        }
       });
     });
   }
 
   getBody(api) {
-    if (!this.state.loaded || !this.state.raceData) {
+    if (!this.state.loaded || !this.state.races) {
       return <Loading type="small" />;
     } else {
-      const races = this.state.raceData;
+      const { races } = this.state;
       return races.map(race => {
         if (race.subraces.length > 0) {
-          return race.subraces.map(subrace => {
+          return this.matchSubraces(race).map(subrace => {
             const { name } = subrace;
             return (
               <Collapsible key={name} id={"race-modal-" + name} label={name}>
@@ -130,16 +140,6 @@ class RaceDetails extends Component {
       loaded: true,
       data: null
     };
-  }
-
-  componentDidMount() {
-    const { api, race, subrace } = this.props;
-    if (!this.state.data) {
-      this.setState({ loaded: false });
-      api
-        .getUrl(race.url)
-        .then(res => this.setState({ loaded: true, data: res }));
-    }
   }
 
   render() {
