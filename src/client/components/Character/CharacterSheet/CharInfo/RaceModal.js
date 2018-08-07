@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Subscribe } from 'unstated';
+import _ from 'lodash';
 import FiveEContainer from '../../../containers/FiveEContainer/FiveEContainer';
 import Modal from '../../../common/Modal/Modal';
 import Loading from '../../../Loading/Loading';
@@ -13,27 +14,58 @@ class RaceModal extends Component {
 
     this.state = {
       loaded: true,
-      raceList: null
+      raceData: []
     };
+
+    this.tempRaceData = [];
 
     this.getBody = this.getBody.bind(this);
     this.loadData = this.loadData.bind(this);
+    this.getSubraces = this.getSubraces.bind(this);
   }
 
   loadData(api) {
-    if (!this.state.raceList) {
+    if (this.state.raceData.length < 1) {
       this.setState({ loaded: false });
-      api
-        .get({ section: 'races' })
-        .then(res => this.setState({ loaded: true, raceList: res.results }));
+      api.get({ section: 'races' }).then(res =>
+        _.forEach(res.results, res => {
+          api.getUrl(res.url).then(res => {
+            let race = Object.assign({}, res, { subraces: [] });
+            console.log(race);
+            if (res.subraces.length < 1) {
+              this.setState(
+                state => {
+                  raceData: state.raceData.concat(race);
+                },
+                () => {}
+              );
+            }
+            this.getSubraces(race, res.subraces, api);
+          });
+        })
+      );
     }
   }
 
+  getSubraces(race, subraces, api) {
+    _.forEach(subraces, subrace => {
+      api.getUrl(subrace.url).then(res => {
+        if (res) {
+          race.subraces.push(res);
+        }
+      });
+    });
+    console.log(this.state.raceData);
+  }
+  // this.setState((state) => ({
+  //   raceData: Object.assign(state.raceData, {race}, )
+  // }));
+
   getBody(api) {
-    if (!this.state.loaded || !this.state.raceList) {
+    if (!this.state.loaded || !this.state.racesData) {
       return <Loading type="small" />;
     } else {
-      const races = this.state.raceList;
+      const races = this.state.racesData;
       return races.map(race => {
         const { name, url } = race;
         return (
@@ -81,7 +113,7 @@ class RaceDetail extends Component {
   }
 
   componentDidMount() {
-    const { api, race } = this.props;
+    const { api, race, subrace } = this.props;
     if (!this.state.data) {
       this.setState({ loaded: false });
       api
