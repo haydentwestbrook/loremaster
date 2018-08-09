@@ -20,6 +20,34 @@ a {
   background-image: none;
 }
 
+.tabs input[id=tab6]:checked ~ div[id=content6] {
+  display: block;
+}
+
+.tabs input[id=tab7]:checked ~ div[id=content7] {
+  display: block;
+}
+
+.tabs input[id=tab8]:checked ~ div[id=content8] {
+  display: block;
+}
+
+.tabs input[id=tab9]:checked ~ div[id=content9] {
+  display: block;
+}
+
+.tabs input[id=tab10]:checked ~ div[id=content10] {
+  display: block;
+}
+
+.tabs input[id=tab11]:checked ~ div[id=content11] {
+  display: block;
+}
+
+.tabs input[id=tab12]:checked ~ div[id=content12] {
+  display: block;
+}
+
 .main {
   max-width: 1200px;
   padding: 20px;
@@ -117,6 +145,18 @@ input[disabled] {
 
 .race-modal .modal-body {
   width: 100%;
+}
+
+.race-modal__content {
+  width: 100%;
+}
+
+.race-modal__subraces {
+  display: flex;
+}
+
+.race-modal__subrace-content {
+  display: none;
 }
 
 /*# sourceMappingURL=index.css.map */
