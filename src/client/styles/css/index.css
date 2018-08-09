@@ -115,4 +115,8 @@ input[disabled] {
   flex-direction: row;
 }
 
+.race-modal .modal-body {
+  width: 100%;
+}
+
 /*# sourceMappingURL=index.css.map */
