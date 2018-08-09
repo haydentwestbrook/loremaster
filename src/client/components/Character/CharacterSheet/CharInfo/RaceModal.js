@@ -156,6 +156,52 @@ const RaceDetails = props => {
   const { race, subraces } = props;
   const hasSubraces = subraces.length > 0;
 
+  const renderTabs = () => {
+    {
+      return subraces.map(subrace => {
+        const { name, index } = subrace;
+        return (
+          <React.Fragment>
+            <label htmlFor={"race-modal__subraces-tab" + index}>
+              <h5>{name}</h5>
+            </label>
+            <input
+              type="radio"
+              id={"race-modal__subrace-tab" + index}
+              name="race-modal-subrace-tabs"
+            />
+          </React.Fragment>
+        );
+      });
+    }
+  };
+
+  const renderSubraceDetails = () => {
+    {
+      return subraces.map(subrace => {
+        const { name, index } = subrace;
+        return (
+          <React.Fragment>
+            <div
+              className="race-modal__subrace-content"
+              id={"race-modal__subrace-content" + index}
+            >
+              <p>
+                <b>Ability Bonuses:</b> {subrace.ability_bonuses}
+              </p>
+              <p>
+                <b>Description: </b> {subrace.desc}
+              </p>
+              <button onClick={() => handleSelect(race, subrace)}>
+                Select
+              </button>
+            </div>
+          </React.Fragment>
+        );
+      });
+    }
+  };
+
   return (
     <React.Fragment>
       <p>
@@ -178,28 +224,8 @@ const RaceDetails = props => {
           <b>Subraces:</b>
         </p>
       ) : null}
-      <div className="race-modal__subraces">
-        {subraces.map(subrace => {
-          return (
-            <div className="race-modal__subrace">
-              <h5>{subrace.name}</h5>
-              <div
-                className="race-modal__subrace-content"
-                id={"race-modal__subrace-content" + subrace.index}
-              >
-                <p>
-                  <b>Ability Bonuses:</b> {subrace.ability_bonuses}
-                </p>
-                <p>
-                  <b>Description: </b> {subrace.desc}
-                </p>
-                <button onClick={() => handleSelect(race, subrace)}>
-                  Select
-                </button>
-              </div>
-            </div>
-          );
-        })}
+      <div className="race-modal__subraces row flex-spaces tabs">
+        {renderTabs()} {renderSubraceDetails()}
       </div>
       {hasSubraces ? null : (
         <button onClick={() => handleSelect(race, null)}>Select</button>
