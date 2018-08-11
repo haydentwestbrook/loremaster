@@ -1,5 +1,5 @@
-@import '../../../../node_modules/papercss/dist/paper.min.css';
-@import '../../../../node_modules/@fortawesome/fontawesome-free/css/all.css';
+@import "../../../../node_modules/papercss/dist/paper.min.css";
+@import "../../../../node_modules/@fortawesome/fontawesome-free/css/all.css";
 .row {
   margin-bottom: 5px;
 }
@@ -90,6 +90,25 @@ a {
   cursor: pointer;
 }
 
+.full-modal {
+  position: absolute;
+}
+.full-modal .full-modal-body {
+  width: 100%;
+  transform: none;
+  left: initial;
+  top: initial !important;
+  margin-top: 65px;
+}
+
+.full-modal-bg {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 .character-list {
   list-style-type: none;
 }
@@ -143,10 +162,6 @@ input[disabled] {
   flex-direction: row;
 }
 
-.race-modal .modal-body {
-  width: 100%;
-}
-
 .race-modal__content {
   width: 100%;
 }
@@ -157,6 +172,7 @@ input[disabled] {
 
 .race-modal__subrace-content {
   display: none;
+  width: 100%;
 }
 
 .race-modal__subraces input[id=race-modal__subrace-tab1]:checked ~ div[id=race-modal__subrace-content1] {

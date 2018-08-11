@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Subscribe } from "unstated";
 import _ from "lodash";
 import FiveEContainer from "../../../containers/FiveEContainer/FiveEContainer";
-import Modal from "../../../common/Modal/Modal";
+import FullModal from "../../../common/FullModal/FullModal";
 import Loading from "../../../Loading/Loading";
 import Input from "../../../common/Input/Input";
 import InfoString from "../../../common/InfoString/InfoString";
@@ -143,10 +143,10 @@ class RaceModal extends Component {
     return (
       <React.Fragment>
         <label className="modal-open fas fa-edit icon icon-edit" htmlFor={id} />
-        <Modal id={id} classes={"race-modal"}>
+        <FullModal id={id} classes={"race-modal"}>
           <h4 className="modal-title">Race</h4>
           {this.renderBody()}
-        </Modal>
+        </FullModal>
       </React.Fragment>
     );
   }
@@ -161,10 +161,8 @@ const RaceDetails = props => {
       return subraces.map(subrace => {
         const { name, index } = subrace;
         return (
-          <React.Fragment>
-            <label htmlFor={"race-modal__subraces-tab" + index}>
-              <h5>{name}</h5>
-            </label>
+          <React.Fragment key={index}>
+            <label htmlFor={"race-modal__subrace-tab" + index}>{name}</label>
             <input
               type="radio"
               id={"race-modal__subrace-tab" + index}
@@ -181,7 +179,7 @@ const RaceDetails = props => {
       return subraces.map(subrace => {
         const { name, index } = subrace;
         return (
-          <React.Fragment>
+          <React.Fragment key={index}>
             <div
               className="race-modal__subrace-content"
               id={"race-modal__subrace-content" + index}
@@ -192,7 +190,10 @@ const RaceDetails = props => {
               <p>
                 <b>Description: </b> {subrace.desc}
               </p>
-              <button onClick={() => handleSelect(race, subrace)}>
+              <button
+                className="btn-secondary"
+                onClick={() => handleSelect(race, subrace)}
+              >
                 Select
               </button>
             </div>
@@ -228,7 +229,12 @@ const RaceDetails = props => {
         {renderTabs()} {renderSubraceDetails()}
       </div>
       {hasSubraces ? null : (
-        <button onClick={() => handleSelect(race, null)}>Select</button>
+        <button
+          className="btn-secondary"
+          onClick={() => handleSelect(race, null)}
+        >
+          Select
+        </button>
       )}
     </React.Fragment>
   );

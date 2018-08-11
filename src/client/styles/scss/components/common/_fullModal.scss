@@ -1,0 +1,19 @@
+.full-modal {
+  position: absolute;
+
+  .full-modal-body {
+    width: 100%;
+    transform: none;
+    left: initial;
+    top: initial !important;
+    margin-top: 65px;
+  }
+}
+
+.full-modal-bg {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
