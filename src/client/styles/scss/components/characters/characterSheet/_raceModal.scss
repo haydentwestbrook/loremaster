@@ -1,5 +1,44 @@
-.race-modal {
-  .modal-body {
-    width: 100%;
-  }
+.race-modal__content {
+  width: 100%;
+}
+
+.race-modal__subraces {
+  display: flex;
+}
+
+.race-modal__subrace-content {
+  display: none;
+  width: 100%;
+}
+
+.race-modal__subraces
+  input[id="race-modal__subrace-tab1"]:checked
+  ~ div[id="race-modal__subrace-content1"] {
+  display: block;
+}
+
+.race-modal__subraces
+  input[id="race-modal__subrace-tab2"]:checked
+  ~ div[id="race-modal__subrace-content2"] {
+  display: block;
+}
+.race-modal__subraces
+  input[id="race-modal__subrace-tab3"]:checked
+  ~ div[id="race-modal__subrace-content3"] {
+  display: block;
+}
+.race-modal__subraces
+  input[id="race-modal__subrace-tab4"]:checked
+  ~ div[id="race-modal__subrace-content4"] {
+  display: block;
+}
+.race-modal__subraces
+  input[id="race-modal__subrace-tab5"]:checked
+  ~ div[id="race-modal__subrace-content5"] {
+  display: block;
+}
+.race-modal__subraces
+  input[id="race-modal__subrace-tab6"]:checked
+  ~ div[id="race-modal__subrace-content6"] {
+  display: block;
 }

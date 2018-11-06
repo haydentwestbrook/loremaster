@@ -1,5 +1,5 @@
-@import '../../../../node_modules/papercss/dist/paper.min.css';
-@import '../../../../node_modules/@fortawesome/fontawesome-free/css/all.css';
+@import "../../../../node_modules/papercss/dist/paper.min.css";
+@import "../../../../node_modules/@fortawesome/fontawesome-free/css/all.css";
 .row {
   margin-bottom: 5px;
 }
@@ -18,6 +18,34 @@ ul li::before {
 
 a {
   background-image: none;
+}
+
+.tabs input[id=tab6]:checked ~ div[id=content6] {
+  display: block;
+}
+
+.tabs input[id=tab7]:checked ~ div[id=content7] {
+  display: block;
+}
+
+.tabs input[id=tab8]:checked ~ div[id=content8] {
+  display: block;
+}
+
+.tabs input[id=tab9]:checked ~ div[id=content9] {
+  display: block;
+}
+
+.tabs input[id=tab10]:checked ~ div[id=content10] {
+  display: block;
+}
+
+.tabs input[id=tab11]:checked ~ div[id=content11] {
+  display: block;
+}
+
+.tabs input[id=tab12]:checked ~ div[id=content12] {
+  display: block;
 }
 
 .main {
@@ -60,6 +88,25 @@ a {
 }
 .modal-open {
   cursor: pointer;
+}
+
+.full-modal {
+  position: absolute;
+}
+.full-modal .full-modal-body {
+  width: 100%;
+  transform: none;
+  left: initial;
+  top: initial !important;
+  margin-top: 65px;
+}
+
+.full-modal-bg {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .character-list {
@@ -115,8 +162,41 @@ input[disabled] {
   flex-direction: row;
 }
 
-.race-modal .modal-body {
+.race-modal__content {
   width: 100%;
+}
+
+.race-modal__subraces {
+  display: flex;
+}
+
+.race-modal__subrace-content {
+  display: none;
+  width: 100%;
+}
+
+.race-modal__subraces input[id=race-modal__subrace-tab1]:checked ~ div[id=race-modal__subrace-content1] {
+  display: block;
+}
+
+.race-modal__subraces input[id=race-modal__subrace-tab2]:checked ~ div[id=race-modal__subrace-content2] {
+  display: block;
+}
+
+.race-modal__subraces input[id=race-modal__subrace-tab3]:checked ~ div[id=race-modal__subrace-content3] {
+  display: block;
+}
+
+.race-modal__subraces input[id=race-modal__subrace-tab4]:checked ~ div[id=race-modal__subrace-content4] {
+  display: block;
+}
+
+.race-modal__subraces input[id=race-modal__subrace-tab5]:checked ~ div[id=race-modal__subrace-content5] {
+  display: block;
+}
+
+.race-modal__subraces input[id=race-modal__subrace-tab6]:checked ~ div[id=race-modal__subrace-content6] {
+  display: block;
 }
 
 /*# sourceMappingURL=index.css.map */
