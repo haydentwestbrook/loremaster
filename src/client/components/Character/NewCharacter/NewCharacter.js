@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { newCharacter } from '../../stores/actions';
 import NewCharacterStore from '../../stores/NewCharacterStore';
-import Authorize from '../../Authentication/Authorize';
+import withAuthorize from '../../Authentication/Authorize';
 import Loading from '../../Loading/Loading';
 
-class NewCharacterInternal extends React.Component {
+class NewCharacter extends React.Component {
   constructor(props) {
     super(props);
     this.state = { index: null };
@@ -34,12 +34,4 @@ class NewCharacterInternal extends React.Component {
   }
 }
 
-const NewCharacterWrapper = props => {
-  return (
-    <Authorize redirect={true}>
-      <NewCharacterInternal {...props} />
-    </Authorize>
-  );
-};
-
-export default NewCharacterWrapper;
+export default withAuthorize(NewCharacter);

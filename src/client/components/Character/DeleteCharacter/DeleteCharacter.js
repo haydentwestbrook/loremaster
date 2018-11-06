@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { deleteCharacter } from '../../stores/actions';
-import Authorize from '../../Authentication/Authorize';
+import withAuthorize from '../../Authentication/Authorize';
 import Loading from '../../Loading/Loading';
 
-class DeleteCharacterInternal extends React.Component {
+class DeleteCharacter extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -19,12 +19,4 @@ class DeleteCharacterInternal extends React.Component {
   }
 }
 
-const DeleteCharacterWrapper = props => {
-  return (
-    <Authorize redirect={true}>
-      <DeleteCharacterInternal {...props} />
-    </Authorize>
-  );
-};
-
-export default DeleteCharacterWrapper;
+export default withAuthorize(DeleteCharacter);

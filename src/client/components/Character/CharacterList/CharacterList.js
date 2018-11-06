@@ -4,9 +4,9 @@ import { loadCharacterList } from '../../stores/actions';
 import CharacterListStore from '../../stores/CharacterListStore';
 import { Row, Column } from '../../common/Markup/Markup';
 import Loading from '../../Loading/Loading';
-import Authorize from '../../Authentication/Authorize';
+import withAuthorize from '../../Authentication/Authorize';
 
-class CharacterListInternal extends Component {
+class CharacterList extends Component {
   constructor(props) {
     super(props);
 
@@ -16,6 +16,7 @@ class CharacterListInternal extends Component {
   }
 
   componentDidMount() {
+    console.log('Mounting');
     loadCharacterList();
     CharacterListStore.on('update', () => {
       this.setState({
@@ -66,12 +67,4 @@ const Characters = props => {
   ));
 };
 
-const CharacterListWrapper = props => {
-  return (
-    <Authorize redirect={true}>
-      <CharacterListInternal {...props} />
-    </Authorize>
-  );
-};
-
-export default CharacterListWrapper;
+export default withAuthorize(CharacterList);

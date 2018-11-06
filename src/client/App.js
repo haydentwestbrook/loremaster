@@ -7,8 +7,6 @@ import Loading from './components/Loading/Loading';
 import CharacterSheet from './components/Character/CharacterSheet/CharacterSheet';
 import Lookup from './components/Lookup/Lookup';
 import Navbar from './components/Navbar/Navbar';
-import CharacterContainer from './components/containers/CharacterContainer/CharacterContainer';
-import FiveEContainer from './components/containers/FiveEContainer/FiveEContainer';
 
 export default class App extends Component {
   constructor(props) {
@@ -18,15 +16,10 @@ export default class App extends Component {
 
   render() {
     const { loaded } = this.state;
-    const containers = [CharacterContainer, FiveEContainer];
     return (
       <div className="app">
         <Navbar />
-        <div className="main">
-          <Provider inject={containers}>
-            {loaded ? this.props.children : <Loading />}
-          </Provider>
-        </div>
+        <div className="main">{loaded ? this.props.children : <Loading />}</div>
       </div>
     );
   }

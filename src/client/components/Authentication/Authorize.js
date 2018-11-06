@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { Subscribe } from 'unstated';
-import AuthContainer from './AuthContainer';
+import settings from '../../settings';
 
-const Authorize = props => {
-  const fallback = props.redirect ? <Redirect to="/" /> : null;
-
-  return (
-    <Subscribe to={[AuthContainer]}>
-      {auth => (auth.isLoggedIn() ? props.children : fallback)}
-    </Subscribe>
-  );
+export const isLoggedIn = () => {
+  return localStorage.getItem(settings.authToken) !== null;
 };
 
-export default Authorize;
+const withAuthorize = children => {
+  const loggedIn = isLoggedIn();
+  return loggedIn ? children : <Redirect to="/" />;
+};
+
+export default withAuthorize;

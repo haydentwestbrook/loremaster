@@ -1,14 +1,23 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Subscribe } from "unstated";
-import Authorize from "../Authentication/Authorize";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Subscribe } from 'unstated';
+import { isLoggedIn } from '../Authentication/Authorize';
 
 class Navbar extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      loggedIn: false
+    };
+  }
+
+  componentDidMount() {
+    this.setState({ loggedIn: isLoggedIn() });
   }
 
   render() {
+    const { loggedIn } = this.state;
     return (
       <nav className="border split-nav">
         <div className="nav-brand">
@@ -27,14 +36,16 @@ class Navbar extends Component {
           </button>
           <div className="collapsible-body">
             <ul className="inline">
-              <Authorize redirect={false}>
-                <li>
-                  <Link to="/characters">Characters</Link>
-                </li>
-                <li>
-                  <Link to="/logout">Log Out</Link>
-                </li>
-              </Authorize>
+              {isLoggedIn() ? (
+                <React.Fragment>
+                  <li>
+                    <Link to="/characters">Characters</Link>
+                  </li>
+                  <li>
+                    <Link to="/logout">Log Out</Link>
+                  </li>
+                </React.Fragment>
+              ) : null}
             </ul>
           </div>
         </div>

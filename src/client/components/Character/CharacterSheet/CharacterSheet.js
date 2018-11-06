@@ -5,13 +5,13 @@ import {
   loadCharacter,
   saveCharacter
 } from '../../stores/actions';
-import Authorize from '../../Authentication/Authorize';
+import withAuthorize from '../../Authentication/Authorize';
 import { Row, Column } from '../../common/Markup/Markup';
 import Loading from '../../Loading/Loading';
 import CharInfo from './CharInfo/CharInfo';
 import Abilities from './Abilities/Abilities';
 
-class CharacterSheetInternal extends Component {
+class CharacterSheet extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -69,12 +69,4 @@ class CharacterSheetInternal extends Component {
   }
 }
 
-const CharacterSheetWrapper = props => {
-  return (
-    <Authorize redirect={true}>
-      <CharacterSheetInternal {...props} />
-    </Authorize>
-  );
-};
-
-export default CharacterSheetWrapper;
+export default withAuthorize(CharacterSheet);

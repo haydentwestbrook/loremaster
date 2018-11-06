@@ -1,7 +1,5 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { Subscribe } from 'unstated';
-import AuthContainer from './AuthContainer';
 import Alert from '../common/Alert/Alert';
 import settings from '../../settings';
 
@@ -65,41 +63,37 @@ class Login extends React.Component {
     if (loggedIn) return <Redirect to="/characters" />;
     else
       return (
-        <Subscribe to={[AuthContainer]}>
-          {auth => (
-            <div className="login">
-              <form onSubmit={e => this.onSubmit(e)}>
-                <Alert show={message} success={success} message={message} />
-                <div className="form-group">
-                  <label>Username</label>
-                  <input
-                    type="text"
-                    name="username"
-                    onChange={e => this.changeUsername(e)}
-                    value={username}
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Password</label>
-                  <input
-                    type="password"
-                    name="password"
-                    onChange={e => this.changePassword(e)}
-                    value={password}
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    className="btn paper-btn btn-secondary"
-                    type="submit"
-                    name="submit"
-                    value={loading ? 'Loading...' : 'Submit'}
-                  />
-                </div>
-              </form>
+        <div className="login">
+          <form onSubmit={e => this.onSubmit(e)}>
+            <Alert show={message} success={success} message={message} />
+            <div className="form-group">
+              <label>Username</label>
+              <input
+                type="text"
+                name="username"
+                onChange={e => this.changeUsername(e)}
+                value={username}
+              />
             </div>
-          )}
-        </Subscribe>
+            <div className="form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                onChange={e => this.changePassword(e)}
+                value={password}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                className="btn paper-btn btn-secondary"
+                type="submit"
+                name="submit"
+                value={loading ? 'Loading...' : 'Submit'}
+              />
+            </div>
+          </form>
+        </div>
       );
   }
 }
