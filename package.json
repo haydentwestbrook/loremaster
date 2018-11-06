@@ -41,8 +41,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "req-flash": "0.0.3",
-    "sass": "^1.9.0",
-    "unstated": "^2.1.1"
+    "sass": "^1.9.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.0.0-beta.52",

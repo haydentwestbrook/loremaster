@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { Subscribe } from 'unstated';
-import FiveEContainer from '../../containers/FiveEContainer/FiveEContainer';
 import Modal from '../../common/Modal/Modal';
 import Loading from '../../Loading/Loading';
-import CharacterContainer from '../../containers/CharacterContainer/CharacterContainer';
 
 class InfoString extends Component {
   constructor(props) {
@@ -39,23 +36,19 @@ class InfoString extends Component {
     const children = this.props.children;
     const id = 'info-string-' + children;
     return (
-      <Subscribe to={[FiveEContainer]}>
-        {api => (
-          <React.Fragment>
-            <label
-              onClick={() => this.loadData(api)}
-              className="info-string text-secondary"
-              htmlFor={id}
-            >
-              {children}
-            </label>
-            <Modal id={id}>
-              <h4 className="modal-title">{children}</h4>
-              {this.getBody()}
-            </Modal>
-          </React.Fragment>
-        )}
-      </Subscribe>
+      <React.Fragment>
+        <label
+          onClick={() => this.loadData(api)}
+          className="info-string text-secondary"
+          htmlFor={id}
+        >
+          {children}
+        </label>
+        <Modal id={id}>
+          <h4 className="modal-title">{children}</h4>
+          {this.getBody()}
+        </Modal>
+      </React.Fragment>
     );
   }
 }

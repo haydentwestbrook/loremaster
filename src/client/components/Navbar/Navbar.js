@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Subscribe } from 'unstated';
 import { isLoggedIn } from '../Authentication/Authorize';
 
 class Navbar extends Component {

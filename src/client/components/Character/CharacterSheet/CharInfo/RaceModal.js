@@ -1,12 +1,10 @@
-import React, { Component } from "react";
-import { Subscribe } from "unstated";
-import _ from "lodash";
-import FiveEContainer from "../../../containers/FiveEContainer/FiveEContainer";
-import FullModal from "../../../common/FullModal/FullModal";
-import Loading from "../../../Loading/Loading";
-import Input from "../../../common/Input/Input";
-import InfoString from "../../../common/InfoString/InfoString";
-import { Collapsible } from "../../../common/Markup/Markup";
+import React, { Component } from 'react';
+import _ from 'lodash';
+import FullModal from '../../../common/FullModal/FullModal';
+import Loading from '../../../Loading/Loading';
+import Input from '../../../common/Input/Input';
+import InfoString from '../../../common/InfoString/InfoString';
+import { Collapsible } from '../../../common/Markup/Markup';
 
 class RaceModal extends Component {
   constructor(props) {
@@ -35,8 +33,8 @@ class RaceModal extends Component {
 
   loadRaces(api, count) {
     if (this.state.races.length < 1) {
-      api.get({ section: "races" }).then(res => {
-        count["races"] += res.count;
+      api.get({ section: 'races' }).then(res => {
+        count['races'] += res.count;
         _.forEach(res.results, race => {
           this.loadRace(race, api, count);
         });
@@ -46,7 +44,7 @@ class RaceModal extends Component {
 
   loadRace(race, api, count) {
     api.getUrl(race.url).then(res => {
-      count["races"] -= 1;
+      count['races'] -= 1;
       this.setState(state => {
         return {
           races: state.races.concat(res),
@@ -58,8 +56,8 @@ class RaceModal extends Component {
 
   loadSubraces(api, count) {
     if (this.state.subraces.length < 1) {
-      api.get({ section: "subraces" }).then(res => {
-        count["subraces"] += res.count;
+      api.get({ section: 'subraces' }).then(res => {
+        count['subraces'] += res.count;
         _.forEach(res.results, subrace => {
           this.loadSubrace(subrace, api, count);
         });
@@ -69,7 +67,7 @@ class RaceModal extends Component {
 
   loadSubrace(subrace, api, count) {
     api.getUrl(subrace.url).then(res => {
-      count["subraces"] -= 1;
+      count['subraces'] -= 1;
       this.setState(state => {
         return {
           subraces: state.subraces.concat(res),
@@ -80,7 +78,7 @@ class RaceModal extends Component {
   }
 
   isLoaded(count) {
-    return count["races"] < 1 && count["subraces"] < 1;
+    return count['races'] < 1 && count['subraces'] < 1;
   }
 
   matchSubraces(race) {
@@ -110,12 +108,12 @@ class RaceModal extends Component {
       return (
         <React.Fragment key={index}>
           <input
-            id={"tab" + index}
+            id={'tab' + index}
             type="radio"
             name="race-modal-tabs"
             defaultChecked={index === 1}
           />
-          <label htmlFor={"tab" + index}>{name}</label>
+          <label htmlFor={'tab' + index}>{name}</label>
         </React.Fragment>
       );
     });
@@ -127,7 +125,7 @@ class RaceModal extends Component {
         <div
           key={race.index}
           className="race-modal__content content"
-          id={"content" + race.index}
+          id={'content' + race.index}
         >
           <RaceDetails race={race} subraces={this.matchSubraces(race)} />
         </div>
@@ -136,14 +134,14 @@ class RaceModal extends Component {
   }
 
   render() {
-    const id = "modal-race";
+    const id = 'modal-race';
     const { write, info, api } = this.props;
 
     if (!write) return null;
     return (
       <React.Fragment>
         <label className="modal-open fas fa-edit icon icon-edit" htmlFor={id} />
-        <FullModal id={id} classes={"race-modal"}>
+        <FullModal id={id} classes={'race-modal'}>
           <h4 className="modal-title">Race</h4>
           {this.renderBody()}
         </FullModal>
@@ -162,10 +160,10 @@ const RaceDetails = props => {
         const { name, index } = subrace;
         return (
           <React.Fragment key={index}>
-            <label htmlFor={"race-modal__subrace-tab" + index}>{name}</label>
+            <label htmlFor={'race-modal__subrace-tab' + index}>{name}</label>
             <input
               type="radio"
-              id={"race-modal__subrace-tab" + index}
+              id={'race-modal__subrace-tab' + index}
               name="race-modal-subrace-tabs"
             />
           </React.Fragment>
@@ -182,7 +180,7 @@ const RaceDetails = props => {
           <React.Fragment key={index}>
             <div
               className="race-modal__subrace-content"
-              id={"race-modal__subrace-content" + index}
+              id={'race-modal__subrace-content' + index}
             >
               <p>
                 <b>Ability Bonuses:</b> {subrace.ability_bonuses}
@@ -240,12 +238,4 @@ const RaceDetails = props => {
   );
 };
 
-const RaceModalWrapper = props => {
-  return (
-    <Subscribe to={[FiveEContainer]}>
-      {api => <RaceModal {...props} api={api} />}
-    </Subscribe>
-  );
-};
-
-export default RaceModalWrapper;
+export default RaceModal;

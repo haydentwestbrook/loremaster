@@ -16,7 +16,6 @@ class CharacterList extends Component {
   }
 
   componentDidMount() {
-    console.log('Mounting');
     loadCharacterList();
     CharacterListStore.on('update', () => {
       this.setState({

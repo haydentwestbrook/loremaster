@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Subscribe } from 'unstated';
-import FiveEContainer from '../containers/FiveEContainer/FiveEContainer';
 
 class Lookup extends Component {
   constructor(props) {
@@ -13,11 +11,7 @@ class Lookup extends Component {
 
   render() {
     const { active } = this.props;
-    return (
-      <Subscribe to={[FiveEContainer]}>
-        {api => <div className={'lookup ' + (active ? 'active' : '')} />}
-      </Subscribe>
-    );
+    return <div className={'lookup ' + (active ? 'active' : '')} />;
   }
 }
 

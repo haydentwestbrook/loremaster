@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-import { Provider } from 'unstated';
 import Main from './components/Main/Main';
 import Loading from './components/Loading/Loading';
 import CharacterSheet from './components/Character/CharacterSheet/CharacterSheet';
