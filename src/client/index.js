@@ -5,7 +5,7 @@ import { createBrowserHistory } from 'history';
 import { Provider } from 'unstated';
 import App from './App';
 import Main from './components/Main/Main';
-import AuthContainer from './components/Authentication/AuthContainer/AuthContainer';
+import AuthContainer from './components/Authentication/AuthContainer';
 import Logout from './components/Authentication/Logout';
 import CharacterList from './components/Character/CharacterList/CharacterList';
 import CharacterSheet from './components/Character/CharacterSheet/CharacterSheet';

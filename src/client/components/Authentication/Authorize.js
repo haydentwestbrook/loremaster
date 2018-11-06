@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import { Subscribe } from "unstated";
-import AuthContainer from "./AuthContainer/AuthContainer";
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import { Subscribe } from 'unstated';
+import AuthContainer from './AuthContainer';
 
 const Authorize = props => {
   const fallback = props.redirect ? <Redirect to="/" /> : null;

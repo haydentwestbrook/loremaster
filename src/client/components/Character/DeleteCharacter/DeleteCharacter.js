@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Subscribe } from 'unstated';
-import CharacterContainer from '../../containers/CharacterContainer/CharacterContainer';
+import { deleteCharacter } from '../../stores/actions';
 import Authorize from '../../Authentication/Authorize';
 import Loading from '../../Loading/Loading';
 
@@ -12,7 +11,7 @@ class DeleteCharacterInternal extends React.Component {
 
   componentDidMount() {
     const index = this.props.match.params.index;
-    this.props.context.deleteCharacter(index);
+    deleteCharacter(index);
   }
 
   render() {
@@ -23,9 +22,7 @@ class DeleteCharacterInternal extends React.Component {
 const DeleteCharacterWrapper = props => {
   return (
     <Authorize redirect={true}>
-      <Subscribe to={[CharacterContainer]}>
-        {context => <DeleteCharacterInternal {...props} context={context} />}
-      </Subscribe>
+      <DeleteCharacterInternal {...props} />
     </Authorize>
   );
 };

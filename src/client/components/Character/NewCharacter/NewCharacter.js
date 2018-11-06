@@ -1,23 +1,33 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Subscribe } from 'unstated';
-import CharacterContainer from '../../containers/CharacterContainer/CharacterContainer';
+import { newCharacter } from '../../stores/actions';
+import NewCharacterStore from '../../stores/NewCharacterStore';
 import Authorize from '../../Authentication/Authorize';
 import Loading from '../../Loading/Loading';
 
 class NewCharacterInternal extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { index: null };
   }
 
   componentDidMount() {
-    this.props.context.getNewCharacter();
+    NewCharacterStore.on('loaded', () => {
+      this.setState({
+        index: NewCharacterStore.getNewIndex()
+      });
+    });
+    newCharacter();
+  }
+
+  componentWillUnmount() {
+    NewCharacterStore.removeAllListeners();
   }
 
   render() {
-    const context = this.props.context;
-    return context.state.newIndex !== null ? (
-      <Redirect to={'/characters/get/' + context.state.newIndex} />
+    const { index } = this.state;
+    return index !== null ? (
+      <Redirect to={'/characters/get/' + index} />
     ) : (
       <Loading />
     );
@@ -27,9 +37,7 @@ class NewCharacterInternal extends React.Component {
 const NewCharacterWrapper = props => {
   return (
     <Authorize redirect={true}>
-      <Subscribe to={[CharacterContainer]}>
-        {context => <NewCharacterInternal {...props} context={context} />}
-      </Subscribe>
+      <NewCharacterInternal {...props} />
     </Authorize>
   );
 };

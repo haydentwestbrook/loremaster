@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { Subscribe } from 'unstated';
-import FiveEContainer from '../../containers/FiveEContainer/FiveEContainer';
-import CharacterContainer from '../../containers/CharacterContainer/CharacterContainer';
+import CharacterStore from '../../stores/CharacterStore';
+import {
+  updateCharacter,
+  loadCharacter,
+  saveCharacter
+} from '../../stores/actions';
 import Authorize from '../../Authentication/Authorize';
 import { Row, Column } from '../../common/Markup/Markup';
 import Loading from '../../Loading/Loading';
@@ -13,36 +16,40 @@ class CharacterSheetInternal extends Component {
     super(props);
     this.state = {
       write: true,
-      error: false
+      error: false,
+      loading: true,
+      character: null
     };
-    this.update = this.update.bind(this);
   }
 
   componentDidMount() {
-    const context = this.props.context;
     const index = parseInt(this.props.match.params.index);
     if (index) {
-      context.loadCharacter(index);
+      CharacterStore.on('update', () => {
+        this.setState({
+          loading: false,
+          character: CharacterStore.get()
+        });
+      });
+      loadCharacter(index);
     } else {
       this.setState({ error: true });
     }
   }
 
-  update(state) {
-    const updateCharacter = this.props.context.updateCharacter;
-    const index = parseInt(this.props.match.params.index);
-    if (index) {
-      updateCharacter(state, index);
-    } else {
-      this.setState({ error: true });
-    }
+  componentWillUnmount() {
+    CharacterStore.removeAllListeners();
   }
+
+  update = character => {
+    const index = parseInt(this.props.match.params.index);
+    updateCharacter(character);
+    saveCharacter(index, character);
+  };
 
   render() {
-    const { write, error } = this.state;
-    const { context } = this.props;
-    if (!context.state.character) return <Loading />;
-    const character = context.state.character;
+    const { write, error, character, loading } = this.state;
+    if (loading) return <Loading />;
     return (
       <div className="character">
         <CharInfo
@@ -65,9 +72,7 @@ class CharacterSheetInternal extends Component {
 const CharacterSheetWrapper = props => {
   return (
     <Authorize redirect={true}>
-      <Subscribe to={[CharacterContainer]}>
-        {context => <CharacterSheetInternal {...props} context={context} />}
-      </Subscribe>
+      <CharacterSheetInternal {...props} />
     </Authorize>
   );
 };

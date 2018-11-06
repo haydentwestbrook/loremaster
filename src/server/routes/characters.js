@@ -126,7 +126,8 @@ newCharacterRoute = (token, res) => {
           _user: user,
           index: user.characters.length + 1,
           name: newCharacter.info.name,
-          data: JSON.stringify(newCharacter)
+          data: JSON.stringify(newCharacter),
+          deleted: false
         });
         user.characters.push(char);
         user.save(err => {

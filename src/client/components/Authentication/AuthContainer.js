@@ -1,6 +1,6 @@
-import React from "react";
-import { Container } from "unstated";
-import settings from "../../../settings";
+import React from 'react';
+import { Container } from 'unstated';
+import settings from '../../settings';
 
 class AuthContainer extends Container {
   constructor(props) {
