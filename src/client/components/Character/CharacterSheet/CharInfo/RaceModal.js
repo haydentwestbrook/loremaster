@@ -5,6 +5,8 @@ import Loading from '../../../Loading/Loading';
 import Input from '../../../common/Input/Input';
 import InfoString from '../../../common/InfoString/InfoString';
 import { Collapsible } from '../../../common/Markup/Markup';
+import fiveE from '../../../stores/FiveEStore';
+import { modalActions } from '../../../stores/actions';
 
 class RaceModal extends Component {
   constructor(props) {
@@ -25,10 +27,9 @@ class RaceModal extends Component {
   }
 
   componentDidMount() {
-    const { api } = this.props;
     let count = { races: 0, subraces: 0 };
-    this.loadRaces(api, count);
-    this.loadSubraces(api, count);
+    this.loadRaces(fiveE, count);
+    this.loadSubraces(fiveE, count);
   }
 
   loadRaces(api, count) {
@@ -43,7 +44,7 @@ class RaceModal extends Component {
   }
 
   loadRace(race, api, count) {
-    api.getUrl(race.url).then(res => {
+    api.getWithUrl(race.url).then(res => {
       count['races'] -= 1;
       this.setState(state => {
         return {
@@ -66,7 +67,7 @@ class RaceModal extends Component {
   }
 
   loadSubrace(subrace, api, count) {
-    api.getUrl(subrace.url).then(res => {
+    api.getWithUrl(subrace.url).then(res => {
       count['subraces'] -= 1;
       this.setState(state => {
         return {
@@ -87,6 +88,12 @@ class RaceModal extends Component {
       return subrace.race.name === race.name;
     });
   }
+
+  handleSelect = (race, subrace) => {
+    const { update } = this.props;
+    update({ race: race, subrace: subrace });
+    modalActions.closeModal();
+  };
 
   renderBody() {
     const { races, subraces, loaded } = this.state;
@@ -127,7 +134,11 @@ class RaceModal extends Component {
           className="race-modal__content content"
           id={'content' + race.index}
         >
-          <RaceDetails race={race} subraces={this.matchSubraces(race)} />
+          <RaceDetails
+            race={race}
+            subraces={this.matchSubraces(race)}
+            handleSelect={this.handleSelect}
+          />
         </div>
       );
     });
@@ -140,7 +151,11 @@ class RaceModal extends Component {
     if (!write) return null;
     return (
       <React.Fragment>
-        <label className="modal-open fas fa-edit icon icon-edit" htmlFor={id} />
+        <label
+          className="modal-open fas fa-edit icon icon-edit"
+          htmlFor={id}
+          onClick={modalActions.openModal}
+        />
         <FullModal id={id} classes={'race-modal'}>
           <h4 className="modal-title">Race</h4>
           {this.renderBody()}
@@ -151,7 +166,7 @@ class RaceModal extends Component {
 }
 
 const RaceDetails = props => {
-  const { race, subraces } = props;
+  const { race, subraces, handleSelect } = props;
   const hasSubraces = subraces.length > 0;
 
   const renderTabs = () => {

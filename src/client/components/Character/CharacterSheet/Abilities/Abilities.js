@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import Ability from './Ability';
 import AbilitiesModal from './AbilitiesModal';
 import { Row, Column } from '../../../common/Markup/Markup';
@@ -12,11 +13,7 @@ const Abilities = props => {
     updateCharacter(Object.assign(character, updated));
   };
 
-  const calculateAbilities = abilities => {
-    return abilities;
-  };
-
-  const keys = Object.keys(calculateAbilities(abilities));
+  const keys = Object.keys(abilities);
   const renderAbilities = keys.map(key => {
     const value = abilities[key];
     return (

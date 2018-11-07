@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import dispatcher from './dispatcher';
+import { dispatcher } from './actions';
 import LocalStorageHelper from '../helpers/LocalStorageHelper';
 import settings from '../../settings';
 import mockCharacter from '../../mocks/mockCharacter';

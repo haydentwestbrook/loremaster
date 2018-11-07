@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Modal from '../../common/Modal/Modal';
 import Loading from '../../Loading/Loading';
+import fiveE from '../../stores/FiveEStore';
 
 class InfoString extends Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class InfoString extends Component {
     return (
       <React.Fragment>
         <label
-          onClick={() => this.loadData(api)}
+          onClick={() => this.loadData(fiveE)}
           className="info-string text-secondary"
           htmlFor={id}
         >

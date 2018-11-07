@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import Input from "../../../common/Input/Input";
-import { Row, Column, Collapsible } from "../../../common/Markup/Markup";
-import RaceModal from "./RaceModal";
+import React, { Component } from 'react';
+import Input from '../../../common/Input/Input';
+import { Row, Column, Collapsible } from '../../../common/Markup/Markup';
+import RaceModal from './RaceModal';
 
 class CharInfo extends Component {
   constructor(props) {
@@ -24,11 +24,11 @@ class CharInfo extends Component {
   }
 
   buildClassDisplay(levels) {
-    return "";
+    return '';
   }
 
-  buildRaceDisplay(race) {
-    return "";
+  buildRaceDisplay(race, subrace) {
+    return subrace ? subrace.name : race.name;
   }
 
   render() {
@@ -37,7 +37,7 @@ class CharInfo extends Component {
     return (
       <React.Fragment>
         <Row>
-          <Column num="12" classes={"align-middle"}>
+          <Column num="12" classes={'align-middle'}>
             <Input
               label="Character Name"
               value={info.name}
@@ -86,7 +86,7 @@ class CharInfo extends Component {
                   <RaceModal info={info} write={write} update={this.update} />
                   <Input
                     label="Race"
-                    value={this.buildRaceDisplay(info.race)}
+                    value={this.buildRaceDisplay(info.race, info.subrace)}
                     write={false}
                     onChange={e => {
                       return null;

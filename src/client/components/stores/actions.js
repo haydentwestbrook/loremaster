@@ -1,31 +1,10 @@
-import dispatcher from './dispatcher';
+import { Dispatcher } from 'flux';
 
-export function updateCharacter(character) {
-  dispatcher.dispatch({
-    type: 'UPDATE_CHARACTER',
-    character: character
-  });
-}
+export const dispatcher = new Dispatcher();
 
-export function loadCharacter(index) {
+export function loadCharacterList() {
   dispatcher.dispatch({
-    type: 'LOAD_CHARACTER',
-    index: index
-  });
-}
-
-export function saveCharacter(index, character) {
-  dispatcher.dispatch({
-    type: 'SAVE_CHARACTER',
-    index: index,
-    character: character
-  });
-}
-
-export function deleteCharacter(index) {
-  dispatcher.dispatch({
-    type: 'DELETE_CHARACTER',
-    index: index
+    type: 'LOAD_CHARACTER_LIST'
   });
 }
 
@@ -35,8 +14,62 @@ export function newCharacter() {
   });
 }
 
-export function loadCharacterList() {
-  dispatcher.dispatch({
-    type: 'LOAD_CHARACTER_LIST'
-  });
-}
+export const characterActions = {
+  updateCharacter: character => {
+    dispatcher.dispatch({
+      type: 'UPDATE_CHARACTER',
+      character: character
+    });
+  },
+
+  loadCharacter: index => {
+    dispatcher.dispatch({
+      type: 'LOAD_CHARACTER',
+      index: index
+    });
+  },
+
+  saveCharacter: (index, character) => {
+    dispatcher.dispatch({
+      type: 'SAVE_CHARACTER',
+      index: index,
+      character: character
+    });
+  },
+
+  deleteCharacter: index => {
+    dispatcher.dispatch({
+      type: 'DELETE_CHARACTER',
+      index: index
+    });
+  }
+};
+
+export const fiveEActions = {
+  getFiveEDataWithUrl: url => {
+    dispatcher.dispatch({
+      type: 'GET_FIVE_E_WITH_URL',
+      url: url
+    });
+  },
+
+  getFiveEDataWithObj: data => {
+    dispatcher.dispatch({
+      type: 'GET_FIVE_E_WITH_OBJ',
+      data: data
+    });
+  }
+};
+
+export const modalActions = {
+  openModal: () => {
+    dispatcher.dispatch({
+      type: 'OPEN_MODAL'
+    });
+  },
+  closeModal: () => {
+    dispatcher.dispatch({
+      type: 'CLOSE_MODAL'
+    });
+  }
+};

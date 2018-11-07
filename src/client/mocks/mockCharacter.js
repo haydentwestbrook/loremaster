@@ -1,12 +1,13 @@
 const mockCharacter = {
   info: {
-    name: "New Character",
+    name: 'New Character',
     race: null,
+    subrace: null,
     levels: null,
-    background: "",
+    background: '',
     experience: 0,
-    alignment: "",
-    playerName: ""
+    alignment: '',
+    playerName: ''
   },
   abilities: {
     Strength: 10,

@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import CharacterStore from '../../stores/CharacterStore';
-import {
-  updateCharacter,
-  loadCharacter,
-  saveCharacter
-} from '../../stores/actions';
+import { characterActions as actions } from '../../stores/actions';
 import withAuthorize from '../../Authentication/Authorize';
 import { Row, Column } from '../../common/Markup/Markup';
 import Loading from '../../Loading/Loading';
@@ -31,7 +27,7 @@ class CharacterSheet extends Component {
           character: CharacterStore.get()
         });
       });
-      loadCharacter(index);
+      actions.loadCharacter(index);
     } else {
       this.setState({ error: true });
     }
@@ -43,8 +39,8 @@ class CharacterSheet extends Component {
 
   update = character => {
     const index = parseInt(this.props.match.params.index);
-    updateCharacter(character);
-    saveCharacter(index, character);
+    actions.updateCharacter(character);
+    actions.saveCharacter(index, character);
   };
 
   render() {
