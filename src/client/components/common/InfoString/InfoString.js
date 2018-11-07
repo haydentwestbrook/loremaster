@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Modal from '../../common/Modal/Modal';
 import Loading from '../../Loading/Loading';
-import fiveE from '../../stores/FiveEStore';
+import fiveE from '../../../resources/FiveE';
 
 class InfoString extends Component {
   constructor(props) {

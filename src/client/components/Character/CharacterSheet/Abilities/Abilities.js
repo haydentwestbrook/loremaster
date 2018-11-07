@@ -3,6 +3,7 @@ import _ from 'lodash';
 import Ability from './Ability';
 import AbilitiesModal from './AbilitiesModal';
 import { Row, Column } from '../../../common/Markup/Markup';
+import { computeAbilities } from '../../compute/compute';
 
 const Abilities = props => {
   const { write, character, updateCharacter } = props;
@@ -13,16 +14,17 @@ const Abilities = props => {
     updateCharacter(Object.assign(character, updated));
   };
 
-  const keys = Object.keys(abilities);
+  const computedAbilities = computeAbilities(character);
+  const keys = Object.keys(computedAbilities);
   const renderAbilities = keys.map(key => {
-    const value = abilities[key];
+    const value = computedAbilities[key];
     return (
       <Ability
         index={keys.indexOf(key)}
         key={key}
         value={value}
         label={key}
-        write={write}
+        write={false}
       />
     );
   });

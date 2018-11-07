@@ -7,13 +7,13 @@ import { getLabel } from './AbilitiesHelper';
 class AbilitiesModal extends Component {
   constructor(props) {
     super(props);
-
-    this.renderAbilities = this.renderAbilities.bind(this);
   }
 
-  renderAbilities = () => {
-    const { abilities, write, update } = this.props;
-    return Object.keys(abilities).map(key => {
+  render() {
+    const id = 'modal-abilities';
+    const { write, abilities, update } = this.props;
+
+    const renderAbilities = Object.keys(abilities).map(key => {
       const value = abilities[key];
       return (
         <div className="abilities-modal__abilities" key={key}>
@@ -27,11 +27,6 @@ class AbilitiesModal extends Component {
         </div>
       );
     });
-  };
-
-  render() {
-    const id = 'modal-abilities';
-    const { write, abilities } = this.props;
 
     if (!write) return null;
     return (
@@ -42,7 +37,7 @@ class AbilitiesModal extends Component {
         />
         <Modal id={id}>
           <h4 className="modal-title">Base Abilities</h4>
-          {this.renderAbilities()}
+          {renderAbilities}
         </Modal>
       </React.Fragment>
     );

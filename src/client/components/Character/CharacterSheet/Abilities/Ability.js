@@ -10,13 +10,7 @@ const Ability = props => {
   return (
     <div className="ability">
       <div className="ability__value">
-        <Input
-          write={false}
-          value={value}
-          onChange={e => onChange(e)}
-          validation="number"
-          simple={true}
-        />
+        <Input write={false} value={value} validation="number" simple={true} />
         <Bonus value={value} />
       </div>
       <InfoString

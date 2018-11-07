@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Input from '../../../common/Input/Input';
 import { Row, Column, Collapsible } from '../../../common/Markup/Markup';
 import RaceModal from './RaceModal';
+import ClassModal from '../ClassModal/ClassModal';
 
 class CharInfo extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class CharInfo extends Component {
   }
 
   buildRaceDisplay(race, subrace) {
-    return subrace ? subrace.name : race.name;
+    return subrace ? subrace.name : race ? race.name : null;
   }
 
   render() {
@@ -52,7 +53,7 @@ class CharInfo extends Component {
             <Row>
               <Column lg="6">
                 <div className="char-info__edit-input">
-                  <span className="fas fa-edit icon icon-edit" />
+                  <ClassModal info={info} write={write} update={this.update} />
                   <Input
                     label="Class and Level"
                     value={this.buildClassDisplay(info.levels)}
@@ -86,7 +87,10 @@ class CharInfo extends Component {
                   <RaceModal info={info} write={write} update={this.update} />
                   <Input
                     label="Race"
-                    value={this.buildRaceDisplay(info.race, info.subrace)}
+                    value={this.buildRaceDisplay(
+                      character.race,
+                      character.subrace
+                    )}
                     write={false}
                     onChange={e => {
                       return null;

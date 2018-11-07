@@ -5,7 +5,7 @@ import Loading from '../../../Loading/Loading';
 import Input from '../../../common/Input/Input';
 import InfoString from '../../../common/InfoString/InfoString';
 import { Collapsible } from '../../../common/Markup/Markup';
-import fiveE from '../../../stores/FiveEStore';
+import fiveE from '../../../../resources/FiveE';
 import { modalActions } from '../../../stores/actions';
 
 class RaceModal extends Component {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import FiveEStore from '../stores/FiveEStore';
-import {} from '../stores/actions';
+import FiveE from '../../resources/FiveE';
 
 class Lookup extends Component {
   constructor(props) {

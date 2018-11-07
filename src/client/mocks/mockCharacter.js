@@ -1,8 +1,14 @@
 const mockCharacter = {
   info: {
     name: 'New Character',
-    race: null,
-    subrace: null,
+    race: {
+      name: '',
+      ability_bonuses: [0, 0, 0, 0, 0, 0]
+    },
+    subrace: {
+      name: '',
+      ability_bonuses: [0, 0, 0, 0, 0, 0]
+    },
     levels: null,
     background: '',
     experience: 0,
@@ -10,12 +16,12 @@ const mockCharacter = {
     playerName: ''
   },
   abilities: {
-    Strength: 10,
-    Dexterity: 10,
-    Constitution: 10,
-    Intelligence: 10,
-    Wisdom: 10,
-    Charisma: 10
+    strength: 10,
+    dexterity: 10,
+    constitution: 10,
+    intelligence: 10,
+    wisdom: 10,
+    charisma: 10
   }
 };
 

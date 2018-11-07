@@ -1,7 +1,14 @@
 const newCharacter = {
   info: {
     name: 'New Character',
-    race: null,
+    race: {
+      name: '',
+      ability_bonuses: [0, 0, 0, 0, 0, 0]
+    },
+    subrace: {
+      name: '',
+      ability_bonuses: [0, 0, 0, 0, 0, 0]
+    },
     levels: null,
     background: '',
     experience: 0,
@@ -9,12 +16,12 @@ const newCharacter = {
     playerName: ''
   },
   abilities: {
-    str: 10,
-    dex: 10,
-    con: 10,
-    int: 10,
-    wis: 10,
-    cha: 10
+    strength: 10,
+    dexterity: 10,
+    constitution: 10,
+    intelligence: 10,
+    wisdom: 10,
+    charisma: 10
   }
 };
 
