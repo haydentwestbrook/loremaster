@@ -1,8 +1,6 @@
-$max-page-width: 1200px;
-
-$color-primary: blue;
-$color-danger: red;
-
+///////////////////////
+//  Layout
+///////////////////////
 $margin: 10px;
 $margin-small: 5px;
 $margin-large: 20px;
@@ -10,3 +8,22 @@ $margin-large: 20px;
 $padding: 10px;
 $padding-small: 5px;
 $padding-large: 20px;
+
+$max-page-width: 1200px;
+
+$nav-bar-height: 65px;
+
+///////////////////////
+//  Fonts
+///////////////////////
+$font-size: 18px;
+$font-size-small: 0.5rem;
+$font-size-large: 1.5rem;
+$font-size-x-large: 2rem;
+$font-size-xx-large: 3.5rem;
+
+///////////////////////
+//  Color
+///////////////////////
+$dark-gray: #2d2d2d;
+$white: #f6f6f6;

@@ -1,5 +1,13 @@
-@import "../../../../node_modules/papercss/dist/paper.min.css";
-@import "../../../../node_modules/@fortawesome/fontawesome-free/css/all.css";
+@import '../../../../node_modules/papercss/dist/paper.min.css';
+@import '../../../../node_modules/@fortawesome/fontawesome-free/css/all.css';
+body {
+  font-size: 18px;
+}
+
+nav {
+  z-index: 0;
+}
+
 .row {
   margin-bottom: 5px;
 }
@@ -92,13 +100,18 @@ a {
 
 .full-modal {
   position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
 }
-.full-modal .full-modal-body {
+
+.full-modal-body {
   width: 100%;
-  transform: none;
-  left: initial;
-  top: initial !important;
-  margin-top: 65px;
+  max-height: 90%;
+  max-width: 1200px;
+  overflow: auto;
 }
 
 .full-modal-bg {
@@ -107,6 +120,8 @@ a {
   bottom: 0;
   left: 0;
   right: 0;
+  background-color: #2d2d2d;
+  opacity: 0.8;
 }
 
 .character-list {

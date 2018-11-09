@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import FullModal from '../../../common/FullModal/FullModal';
+import Modal from '../../../common/Modal/Modal';
 import Loading from '../../../Loading/Loading';
 import Input from '../../../common/Input/Input';
 import InfoString from '../../../common/InfoString/InfoString';
@@ -153,12 +153,13 @@ class RaceModal extends Component {
       <React.Fragment>
         <label
           className="modal-open fas fa-edit icon icon-edit"
+          htmlFor={id}
           onClick={() => modalActions.openModal(id)}
         />
-        <FullModal id={id} classes={'race-modal'}>
+        <Modal id={id} classes={'race-modal'} full={true}>
           <h4 className="modal-title">Race</h4>
           {this.renderBody()}
-        </FullModal>
+        </Modal>
       </React.Fragment>
     );
   }

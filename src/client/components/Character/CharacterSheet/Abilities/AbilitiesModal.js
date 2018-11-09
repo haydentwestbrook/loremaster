@@ -3,6 +3,7 @@ import Modal from '../../../common/Modal/Modal';
 import Input from '../../../common/Input/Input';
 import InfoString from '../../../common/InfoString/InfoString';
 import { getLabel } from './AbilitiesHelper';
+import { modalActions } from '../../../stores/actions';
 
 class AbilitiesModal extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class AbilitiesModal extends Component {
   }
 
   render() {
-    const id = 'modal-abilities';
+    const id = 'abilities-modal';
     const { write, abilities, update } = this.props;
 
     const renderAbilities = Object.keys(abilities).map(key => {
@@ -34,6 +35,7 @@ class AbilitiesModal extends Component {
         <label
           className="abilities-modal__open modal-open fas fa-edit icon icon-edit"
           htmlFor={id}
+          onClick={() => modalActions.openModal(id)}
         />
         <Modal id={id}>
           <h4 className="modal-title">Base Abilities</h4>

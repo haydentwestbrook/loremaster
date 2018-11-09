@@ -1,41 +1,25 @@
 .full-modal {
-  // position: absolute;
-  // top: 0;
-  // left: 0;
-  // right: 0;
-  // z-index: 1;
-}
-
-.full-modal-close {
-  // float: right;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
 }
 
 .full-modal-body {
-  // width: 100%;
-  // height: 100%;
-  // background-color: $main-background-color;
-  // max-width: $max-page-width;
-  // margin: auto;
-  // padding: ($nav-bar-height + 30px) 30px 30px 30px;
-
-  // transition: all 0.6s ease-in-out 0s;
-  // -webkit-transform: translateX(-50%) scaleY(0);
-  // -o-transform: translateX(-50%) scaleY(0);
-  // -ms-transform: translateX(-50%) scaleY(0);
-  // transform: translateX(-50%) scaleY(0);
-  // -webkit-transform-origin: top;
-  // -o-transform-origin: top;
-  // -ms-transform-origin: top;
-  // transform-origin: top;
+  width: 100%;
+  max-height: 90%;
+  max-width: $max-page-width;
+  overflow: auto;
 }
 
 .full-modal-bg {
-  // position: fixed;
-  // top: 0;
-  // bottom: 0;
-  // left: 0;
-  // right: 0;
-  // background-color: darken($main-background-color, 80);
-  // opacity: 0.6;
-  // z-index: -1;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: $dark-gray;
+  opacity: 0.8;
 }

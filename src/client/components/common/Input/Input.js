@@ -54,7 +54,7 @@ class Input extends Component {
           <input
             disabled={!write}
             className={
-              'input input-text' + (error ? ' alert alert-danger' : '')
+              'input input-block' + (error ? ' alert alert-danger' : '')
             }
             type="text"
             value={error ? '' : value}
@@ -70,7 +70,7 @@ class Input extends Component {
       <div className="form-group">
         <input
           disabled={!write}
-          className={'input input-text' + (error ? ' alert alert-danger' : '')}
+          className={'input input-block' + (error ? ' alert alert-danger' : '')}
           type="text"
           value={error ? '' : value}
           onChange={e => {

@@ -1,3 +1,7 @@
+nav {
+  z-index: 0;
+}
+
 .row {
   margin-bottom: $margin-small;
 }
@@ -18,24 +22,24 @@ a {
   background-image: none;
 }
 
-.tabs input[id="tab6"]:checked ~ div[id="content6"] {
+.tabs input[id='tab6']:checked ~ div[id='content6'] {
   display: block;
 }
-.tabs input[id="tab7"]:checked ~ div[id="content7"] {
+.tabs input[id='tab7']:checked ~ div[id='content7'] {
   display: block;
 }
-.tabs input[id="tab8"]:checked ~ div[id="content8"] {
+.tabs input[id='tab8']:checked ~ div[id='content8'] {
   display: block;
 }
-.tabs input[id="tab9"]:checked ~ div[id="content9"] {
+.tabs input[id='tab9']:checked ~ div[id='content9'] {
   display: block;
 }
-.tabs input[id="tab10"]:checked ~ div[id="content10"] {
+.tabs input[id='tab10']:checked ~ div[id='content10'] {
   display: block;
 }
-.tabs input[id="tab11"]:checked ~ div[id="content11"] {
+.tabs input[id='tab11']:checked ~ div[id='content11'] {
   display: block;
 }
-.tabs input[id="tab12"]:checked ~ div[id="content12"] {
+.tabs input[id='tab12']:checked ~ div[id='content12'] {
   display: block;
 }
