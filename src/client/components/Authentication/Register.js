@@ -1,15 +1,15 @@
-import React from "react";
-import settings from "../../settings";
-import Alert from "../common/Alert/Alert";
+import React from 'react';
+import settings from '../../settings';
+import Alert from '../common/Alert/Alert';
 
 class Register extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: "",
-      password: "",
-      passwordRepeat: "",
+      username: '',
+      password: '',
+      passwordRepeat: '',
       success: false,
       message: false,
       loading: false
@@ -38,7 +38,7 @@ class Register extends React.Component {
     if (password == passwordRepeat) {
       return true;
     }
-    this.setState({ success: false, message: "Passwords must match." });
+    this.setState({ success: false, message: 'Passwords must match.' });
     return false;
   }
 
@@ -46,10 +46,10 @@ class Register extends React.Component {
     event.preventDefault();
     if (this.validate()) {
       this.setState({ loading: true });
-      fetch(settings.apiUrl + "/register", {
-        method: "post",
+      fetch(settings.apiUrl + '/register', {
+        method: 'post',
         headers: {
-          "Content-Type": "application/json; charset=utf-8"
+          'Content-Type': 'application/json; charset=utf-8'
         },
         body: JSON.stringify(this.state)
       }).then(res => {
@@ -84,6 +84,7 @@ class Register extends React.Component {
           <div className="form-group">
             <label>Username</label>
             <input
+              className="input-text"
               type="text"
               name="username"
               onChange={e => this.changeUsername(e)}
@@ -93,6 +94,7 @@ class Register extends React.Component {
           <div className="form-group">
             <label>Password</label>
             <input
+              className="input-text"
               type="password"
               name="password"
               onChange={e => this.changePassword(e)}
@@ -102,6 +104,7 @@ class Register extends React.Component {
           <div className="form-group">
             <label>Repeat password</label>
             <input
+              className="input-text"
               type="password"
               name="password-repeat"
               onChange={e => this.changePasswordRepeat(e)}
@@ -113,7 +116,7 @@ class Register extends React.Component {
               className="btn paper-btn btn-secondary"
               type="submit"
               name="submit"
-              value={loading ? "Loading..." : "Submit"}
+              value={loading ? 'Loading...' : 'Submit'}
             />
           </div>
         </form>

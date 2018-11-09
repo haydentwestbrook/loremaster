@@ -13,10 +13,8 @@ class ClassModal extends Component {
   componentDidMount() {}
 
   render() {
-    const id = 'modal-class';
+    const id = 'class-modal';
     const { write, info, api } = this.props;
-
-    const renderBody = [];
 
     if (!write) return null;
     return (
@@ -24,15 +22,19 @@ class ClassModal extends Component {
         <label
           className="modal-open fas fa-edit icon icon-edit"
           htmlFor={id}
-          onClick={modalActions.openModal}
+          onClick={() => modalActions.openModal(id)}
         />
         <FullModal id={id} classes={'class-modal'}>
           <h4 className="modal-title">Class and Level</h4>
-          {renderBody}
+          <ClassModalBody />
         </FullModal>
       </React.Fragment>
     );
   }
 }
+
+const ClassModalBody = props => {
+  return <h4>Class modal</h4>;
+};
 
 export default ClassModal;

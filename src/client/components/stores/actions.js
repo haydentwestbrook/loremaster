@@ -62,9 +62,10 @@ export const fiveEActions = {
 };
 
 export const modalActions = {
-  openModal: () => {
+  openModal: modalId => {
     dispatcher.dispatch({
-      type: 'OPEN_MODAL'
+      type: 'OPEN_MODAL',
+      id: modalId
     });
   },
   closeModal: () => {

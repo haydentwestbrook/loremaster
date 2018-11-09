@@ -11,15 +11,20 @@ class ModalStore extends EventEmitter {
     return this.open;
   }
 
+  isOpen(id) {
+    return this.open && this.id == id;
+  }
+
   handleActions = action => {
     switch (action.type) {
       case 'OPEN_MODAL': {
         this.open = true;
-        this.emit('open');
+        this.emit('open-' + action.id);
         break;
       }
       case 'CLOSE_MODAL': {
         this.close = true;
+        console.log('emit close');
         this.emit('close');
         break;
       }

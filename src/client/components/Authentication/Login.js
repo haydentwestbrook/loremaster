@@ -70,6 +70,7 @@ class Login extends React.Component {
               <label>Username</label>
               <input
                 type="text"
+                className="input-text"
                 name="username"
                 onChange={e => this.changeUsername(e)}
                 value={username}
@@ -79,6 +80,7 @@ class Login extends React.Component {
               <label>Password</label>
               <input
                 type="password"
+                className="input-text"
                 name="password"
                 onChange={e => this.changePassword(e)}
                 value={password}

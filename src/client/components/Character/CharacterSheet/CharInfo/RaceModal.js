@@ -145,7 +145,7 @@ class RaceModal extends Component {
   }
 
   render() {
-    const id = 'modal-race';
+    const id = 'race-modal';
     const { write, info, api } = this.props;
 
     if (!write) return null;
@@ -153,8 +153,7 @@ class RaceModal extends Component {
       <React.Fragment>
         <label
           className="modal-open fas fa-edit icon icon-edit"
-          htmlFor={id}
-          onClick={modalActions.openModal}
+          onClick={() => modalActions.openModal(id)}
         />
         <FullModal id={id} classes={'race-modal'}>
           <h4 className="modal-title">Race</h4>

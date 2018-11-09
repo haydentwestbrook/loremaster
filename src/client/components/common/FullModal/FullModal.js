@@ -5,16 +5,21 @@ import { modalActions } from '../../stores/actions';
 class FullModal extends Component {
   constructor(props) {
     super(props);
+    const { id } = props;
     this.state = {
-      open: ModalStore.getState()
+      open: ModalStore.isOpen(id)
     };
+
+    this.close = this.close.bind(this);
   }
 
   componentDidMount() {
-    ModalStore.on('open', () => {
+    const { id } = this.props;
+    ModalStore.on('open-' + id, () => {
       this.setState({ open: true });
     });
     ModalStore.on('close', () => {
+      console.log('closing');
       this.setState({ open: false });
     });
   }
@@ -23,25 +28,28 @@ class FullModal extends Component {
     ModalStore.removeAllListeners();
   }
 
-  close = () => {
+  close() {
+    console.log('clicked close');
     modalActions.closeModal();
-  };
+  }
 
   render() {
     const { id, classes, children } = this.props;
     const { open } = this.state;
     return open ? (
       <React.Fragment>
-        <input className="modal-state" id={id} type="checkbox" />
-        <div className={'modal full-modal ' + classes}>
-          <label className="modal-bg" htmlFor={id} />
-          <div className="full-modal-background" />
-          <div className="modal-body full-modal-body">
-            <label className="btn-close" htmlFor={id} onClick={this.close}>
+        <div className={'full-modal ' + classes}>
+          <div className="full-modal-body">
+            <label
+              className="full-modal-close"
+              htmlFor={id}
+              onClick={this.close}
+            >
               X
             </label>
             {children}
           </div>
+          <div className="full-modal-bg" onClick={this.close} />
         </div>
       </React.Fragment>
     ) : null;
