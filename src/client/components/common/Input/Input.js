@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { modalActions } from '../../stores/actions';
 
 class Input extends Component {
   constructor(props) {
@@ -35,7 +36,8 @@ class Input extends Component {
     this.setState({ error: true });
   };
 
-  error = (onError, validation) => {
+  error = () => {
+    const {onError, validation} = this.props;
     if (onError) return onError;
     return (
       <span className="input__error">
@@ -46,8 +48,9 @@ class Input extends Component {
   };
 
   render() {
-    const { value, write, label, validation, simple, onError } = this.props;
+    const { value, write, label, validation, simple, onError, modalId } = this.props;
     const { error } = this.state;
+    
     if (simple) {
       return (
         <React.Fragment>
@@ -62,12 +65,13 @@ class Input extends Component {
               this.handleChange(e);
             }}
           />
-          {error ? this.error(onError, validation) : null}
+          {error ? this.error() : null}
         </React.Fragment>
       );
     }
     return (
       <div className="form-group">
+        <LabelContent modalId={modalId} label={label}/>
         <input
           disabled={!write}
           className={'input input-block' + (error ? ' alert alert-danger' : '')}
@@ -77,10 +81,25 @@ class Input extends Component {
             this.handleChange(e);
           }}
         />
-        <span>{label}</span>
-        {error ? this.error(onError, validation) : null}
+        {error ? this.error() : null}
       </div>
     );
+  }
+}
+
+const LabelContent = props => {
+  const {modalId, label} = props;
+  if(modalId) {
+    return (
+      <span onClick={() => modalActions.openModal(modalId)}>
+        <label>{label}</label>
+        <span
+          className="modal-open fas fa-edit icon icon-edit"
+          htmlFor={modalId}
+        />
+      </span>)
+  } else {
+    return <label>{label}</label>
   }
 }
 

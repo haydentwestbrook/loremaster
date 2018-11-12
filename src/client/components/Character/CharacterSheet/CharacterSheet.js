@@ -53,13 +53,11 @@ class CharacterSheet extends Component {
           write={write}
           updateCharacter={this.update}
         />
-        <Row>
-          <Abilities
-            character={character}
-            write={write}
-            updateCharacter={this.update}
-          />
-        </Row>
+        <Abilities
+          character={character}
+          write={write}
+          updateCharacter={this.update}
+        />
       </div>
     );
   }

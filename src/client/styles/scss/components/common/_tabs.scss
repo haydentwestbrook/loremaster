@@ -1,0 +1,16 @@
+.tabs-active {
+	border-bottom: solid 3px #0071de;
+    color: #41403e;
+}
+
+.tabs-headers {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.tabs-content {
+	width: 100%;
+	margin-top: $margin;
+}

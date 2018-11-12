@@ -2,6 +2,7 @@
 @import '../../../../node_modules/@fortawesome/fontawesome-free/css/all.css';
 body {
   font-size: 18px;
+  -webkit-font-smoothing: antialiased;
 }
 
 nav {
@@ -124,6 +125,23 @@ a {
   opacity: 0.8;
 }
 
+.tabs-active {
+  border-bottom: solid 3px #0071de;
+  color: #41403e;
+}
+
+.tabs-headers {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.tabs-content {
+  width: 100%;
+  margin-top: 10px;
+}
+
 .character-list {
   list-style-type: none;
 }
@@ -186,32 +204,7 @@ input[disabled] {
 }
 
 .race-modal__subrace-content {
-  display: none;
   width: 100%;
-}
-
-.race-modal__subraces input[id=race-modal__subrace-tab1]:checked ~ div[id=race-modal__subrace-content1] {
-  display: block;
-}
-
-.race-modal__subraces input[id=race-modal__subrace-tab2]:checked ~ div[id=race-modal__subrace-content2] {
-  display: block;
-}
-
-.race-modal__subraces input[id=race-modal__subrace-tab3]:checked ~ div[id=race-modal__subrace-content3] {
-  display: block;
-}
-
-.race-modal__subraces input[id=race-modal__subrace-tab4]:checked ~ div[id=race-modal__subrace-content4] {
-  display: block;
-}
-
-.race-modal__subraces input[id=race-modal__subrace-tab5]:checked ~ div[id=race-modal__subrace-content5] {
-  display: block;
-}
-
-.race-modal__subraces input[id=race-modal__subrace-tab6]:checked ~ div[id=race-modal__subrace-content6] {
-  display: block;
 }
 
 /*# sourceMappingURL=index.css.map */

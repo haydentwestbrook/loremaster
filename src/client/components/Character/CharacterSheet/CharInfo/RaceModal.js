@@ -3,6 +3,7 @@ import _ from 'lodash';
 import Modal from '../../../common/Modal/Modal';
 import Loading from '../../../Loading/Loading';
 import Input from '../../../common/Input/Input';
+import Tabs from '../../../common/Tabs/Tabs';
 import InfoString from '../../../common/InfoString/InfoString';
 import { Collapsible } from '../../../common/Markup/Markup';
 import fiveE from '../../../../resources/FiveE';
@@ -18,8 +19,6 @@ class RaceModal extends Component {
       subraces: []
     };
 
-    this.renderBody = this.renderBody.bind(this);
-    this.renderDetails = this.renderDetails.bind(this);
     this.loadRaces = this.loadRaces.bind(this);
     this.loadSubraces = this.loadSubraces.bind(this);
     this.loadSubrace = this.loadSubrace.bind(this);
@@ -95,70 +94,38 @@ class RaceModal extends Component {
     modalActions.closeModal();
   };
 
-  renderBody() {
-    const { races, subraces, loaded } = this.state;
-    if (!loaded || !races) {
-      return <Loading type="small" />;
-    } else {
-      return (
-        <div className="row flex-spaces tabs">
-          {this.renderTabs(races)}
-          {this.renderDetails(races, subraces)}
-        </div>
-      );
-    }
-  }
-
-  renderTabs(races) {
-    return races.map(race => {
-      const { name, index } = race;
-      return (
-        <React.Fragment key={index}>
-          <input
-            id={'tab' + index}
-            type="radio"
-            name="race-modal-tabs"
-            defaultChecked={index === 1}
-          />
-          <label htmlFor={'tab' + index}>{name}</label>
-        </React.Fragment>
-      );
-    });
-  }
-
-  renderDetails(races, subraces) {
-    return races.map(race => {
-      return (
-        <div
-          key={race.index}
-          className="race-modal__content content"
-          id={'content' + race.index}
-        >
-          <RaceDetails
-            race={race}
-            subraces={this.matchSubraces(race)}
-            handleSelect={this.handleSelect}
-          />
-        </div>
-      );
-    });
-  }
-
   render() {
     const id = 'race-modal';
     const { write, info, api } = this.props;
+    const { races, subraces, loaded } = this.state;
+
+    const tabsContent = races.map(race => 
+              <RaceDetails
+                key={race.name}
+                race={race}
+                subraces={this.matchSubraces(race)}
+                handleSelect={this.handleSelect}
+              />
+            );
+
+    const body =  (
+
+      (loaded && races) ? 
+
+        (<Tabs id={'race-modal-tabs'} tabs={_.map(races, 'name')}>
+             {tabsContent}
+          </Tabs>)
+
+        : <Loading type="small" />
+  );
+  
 
     if (!write) return null;
     return (
       <React.Fragment>
-        <label
-          className="modal-open fas fa-edit icon icon-edit"
-          htmlFor={id}
-          onClick={() => modalActions.openModal(id)}
-        />
         <Modal id={id} classes={'race-modal'} full={true}>
           <h4 className="modal-title">Race</h4>
-          {this.renderBody()}
+          {body}
         </Modal>
       </React.Fragment>
     );
@@ -169,33 +136,12 @@ const RaceDetails = props => {
   const { race, subraces, handleSelect } = props;
   const hasSubraces = subraces.length > 0;
 
-  const renderTabs = () => {
-    {
-      return subraces.map(subrace => {
-        const { name, index } = subrace;
-        return (
-          <React.Fragment key={index}>
-            <label htmlFor={'race-modal__subrace-tab' + index}>{name}</label>
-            <input
-              type="radio"
-              id={'race-modal__subrace-tab' + index}
-              name="race-modal-subrace-tabs"
-            />
-          </React.Fragment>
-        );
-      });
-    }
-  };
-
-  const renderSubraceDetails = () => {
-    {
-      return subraces.map(subrace => {
+  const tabsContent = subraces.map(subrace => {
         const { name, index } = subrace;
         return (
           <React.Fragment key={index}>
             <div
               className="race-modal__subrace-content"
-              id={'race-modal__subrace-content' + index}
             >
               <p>
                 <b>Ability Bonuses:</b> {subrace.ability_bonuses}
@@ -213,8 +159,10 @@ const RaceDetails = props => {
           </React.Fragment>
         );
       });
-    }
-  };
+    
+
+  const tabs = <Tabs id={'race-modal-subraces-tabs'} tabs={_.map(subraces, 'name')} >{tabsContent}</Tabs>;
+
 
   return (
     <React.Fragment>
@@ -239,7 +187,7 @@ const RaceDetails = props => {
         </p>
       ) : null}
       <div className="race-modal__subraces row flex-spaces tabs">
-        {renderTabs()} {renderSubraceDetails()}
+        {tabs}
       </div>
       {hasSubraces ? null : (
         <button

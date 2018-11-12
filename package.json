@@ -1,19 +1,16 @@
 {
   "name": "loremaster",
   "version": "1.0.0",
-  "description":
-    "Boilerplate to build a full stack web application using React, Node.js, Express and Webpack.",
+  "description": "Boilerplate to build a full stack web application using React, Node.js, Express and Webpack.",
   "main": "src/server/index.js",
   "scripts": {
     "sass": "sass --watch src/client/styles/scss:src/client/styles/css",
     "mongodb": "mongod --dbpath=data",
     "start": "node src/server/index.js",
     "build": "webpack --mode production",
-    "client":
-      "webpack-dev-server --mode development --devtool inline-source-map --hot",
+    "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "nodemon src/server/index.js",
-    "dev":
-      "concurrently \"npm run server\" \"npm run client\" \"npm run mongodb\""
+    "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run mongodb\""
   },
   "author": "Hayden Westbrook",
   "dependencies": {
@@ -35,7 +32,7 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
-    "react": "^16.3.1",
+    "react": "^16.6.1",
     "react-dom": "^16.3.1",
     "react-pure-lifecycle": "^3.0.0",
     "react-router": "^4.3.1",
@@ -44,14 +41,13 @@
     "sass": "^1.9.0"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.0.0-beta.52",
+    "@babel/core": "^7.1.5",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
+    "@babel/preset-env": "^7.1.5",
+    "@babel/preset-react": "^7.0.0",
     "@fortawesome/fontawesome-free": "^5.2.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
+    "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^0.1.19",
     "concurrently": "^3.5.1",
     "css-loader": "^0.28.11",
